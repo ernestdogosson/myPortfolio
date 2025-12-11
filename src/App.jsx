@@ -16,7 +16,7 @@ function App() {
           <Route path="/projects" element={<Portfolio />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 }

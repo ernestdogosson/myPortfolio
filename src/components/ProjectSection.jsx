@@ -44,7 +44,7 @@ function ProjectSection() {
               githubRepo={project.githubRepo}
               details={project.details}
             />
-          ))}
+          )) }
       </div>
     </div>
   );

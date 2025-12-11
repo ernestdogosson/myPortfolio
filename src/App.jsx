@@ -8,7 +8,7 @@ import Navbar from "./Navbar.jsx";
 function App() {
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter basename="/myPortfolio">
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />

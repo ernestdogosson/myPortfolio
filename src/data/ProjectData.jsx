@@ -1,6 +1,7 @@
 import travleAgency from "../assets/travelAgency.png";
 import wordGame from "../assets/word-game.png";
 import movieLibrary from "../assets/movieLibrary.png";
+import portfolioApp from "../assets/travelAgency.png";
 
 const ProjectsData = [
   {
@@ -67,6 +68,40 @@ const ProjectsData = [
 
       designNotes:
         "Focused on fast feedback through UI updates and clean input experience for the user. Learned how to sync game logic with visual state changes.",
+    },
+  },
+
+  {
+    name: "Portfolio Website",
+    githubRepo: "https://github.com/ernestdogosson/react-01",
+    techStack: ["React", "React Router", "Tailwind CSS"],
+    projectDescription: "Personal portfolio website with multi-page navigation.",
+
+    projectInfo:
+      "Professional portfolio showcasing projects, skills, and contact information with smooth routing and modern design.",
+
+    skillsLearned:
+      "React Router implementation, component architecture, responsive design with Tailwind, and state management.",
+
+    challenges:
+      "Setting up routing structure, component organization, and maintaining consistent design across pages.",
+
+    bgImage: portfolioApp,
+
+    details: {
+      longDescription:
+        "A modern, fully responsive portfolio website built with React and React Router. Features smooth page navigation, project showcase with filtering, about section, and contact form. Demonstrates professional frontend development skills with clean component architecture and modern design patterns.",
+
+      features: [
+        "Multi-page SPA with React Router",
+        "Dynamic project filtering and search",
+        "Responsive design for all devices",
+        "Component-based architecture",
+        "Modern UI with Tailwind CSS",
+      ],
+
+      designNotes:
+        "Focused on clean, maintainable code structure and professional presentation. Used React Router for seamless navigation and Tailwind for rapid, consistent styling.",
     },
   },
 

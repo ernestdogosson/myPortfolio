@@ -1,12 +1,12 @@
 import travleAgency from "../assets/travelAgency.png";
 import wordGame from "../assets/word-game.png";
 import movieLibrary from "../assets/movieLibrary.png";
-import portfolioApp from "../assets/travelAgency.png";
 
 const ProjectsData = [
   {
     name: "Travel Agency Website",
     githubRepo: "https://github.com/ernestdogosson/assignment-15",
+    liveUrl: "https://ernestdogosson.github.io/assignment-15/",
     techStack: ["HTML", "Bootstrap", "CSS"],
     projectDescription:
       "Responsive travel agency showcasing destinations and packages.",
@@ -41,6 +41,7 @@ const ProjectsData = [
   {
     name: "Word Typing Game",
     githubRepo: "https://github.com/ernestdogosson/js-07",
+    liveUrl: "https://ernestdogosson.github.io/js-07/", // Add your live URL
     techStack: ["HTML", "CSS", "JavaScript"],
     projectDescription: "Fast-paced typing game with timer challenges.",
 
@@ -74,8 +75,10 @@ const ProjectsData = [
   {
     name: "Portfolio Website",
     githubRepo: "https://github.com/ernestdogosson/react-01",
+    liveUrl: "https://ernestdogosson.github.io/react-01/", // Add your live URL
     techStack: ["React", "React Router", "Tailwind CSS"],
-    projectDescription: "Personal portfolio website with multi-page navigation.",
+    projectDescription:
+      "Personal portfolio website with multi-page navigation.",
 
     projectInfo:
       "Professional portfolio showcasing projects, skills, and contact information with smooth routing and modern design.",
@@ -86,7 +89,7 @@ const ProjectsData = [
     challenges:
       "Setting up routing structure, component organization, and maintaining consistent design across pages.",
 
-    bgImage: portfolioApp,
+    bgImage: null,
 
     details: {
       longDescription:
@@ -108,6 +111,7 @@ const ProjectsData = [
   {
     name: "Movie Library App",
     githubRepo: "https://github.com/ernestdogosson/js-06",
+    liveUrl: "https://ernestdogosson.github.io/movieLibraryApp/", // Add your live URL
     techStack: ["JavaScript", "HTML", "CSS"],
     projectDescription: "Track and organize your movie collection.",
 
@@ -135,6 +139,41 @@ const ProjectsData = [
 
       designNotes:
         "The biggest focus was clarity and user feedback. Learned to manage multiple layers of UI state without relying on frameworks.",
+    },
+  },
+
+  {
+    name: "Coming Soon",
+    githubRepo: null,
+    liveUrl: null,
+    techStack: ["React", "Node.js", "MongoDB"],
+    projectDescription: "New project in development.",
+
+    projectInfo:
+      "Details coming soon. This space is reserved for an upcoming project.",
+
+    skillsLearned:
+      "Full-stack development, database design, and API integration.",
+
+    challenges:
+      "Building scalable architecture and implementing modern best practices.",
+
+    bgImage: null,
+    bgSize: "cover",
+
+    details: {
+      longDescription:
+        "This project is currently in development. Check back soon for updates on this exciting new addition to the portfolio.",
+
+      features: [
+        "Feature details coming soon",
+        "Modern tech stack",
+        "Responsive design",
+        "Performance optimized",
+      ],
+
+      designNotes:
+        "Design documentation will be added once the project reaches its first milestone.",
     },
   },
 ];

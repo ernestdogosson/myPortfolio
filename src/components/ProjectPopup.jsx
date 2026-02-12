@@ -89,7 +89,7 @@ function ProjectPopup({ project, onClose, accent }) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-stone-900/60 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-backdrop backdrop-blur-sm"
       variants={backdropVariants}
       initial="hidden"
       animate="visible"
@@ -97,7 +97,7 @@ function ProjectPopup({ project, onClose, accent }) {
       onClick={onClose}
     >
       <motion.div
-        className="bg-white rounded-3xl shadow-2xl overflow-hidden max-w-6xl w-full max-h-[90vh]"
+        className="bg-[#141920] border border-bdr rounded-3xl shadow-2xl overflow-hidden max-w-6xl w-full max-h-[90vh]"
         variants={modalVariants}
         initial="hidden"
         animate="visible"
@@ -108,7 +108,7 @@ function ProjectPopup({ project, onClose, accent }) {
         <div className="flex flex-col md:flex-row h-full md:h-[600px]">
           {/* Image Section - 60% */}
           <motion.div
-            className="relative w-full md:w-[60%] h-[250px] md:h-full bg-stone-100 flex-shrink-0 overflow-hidden"
+            className="relative w-full md:w-[60%] h-[250px] md:h-full bg-elevated flex-shrink-0 overflow-hidden"
             variants={imageVariants}
           >
             {project.bgImage ? (
@@ -121,9 +121,9 @@ function ProjectPopup({ project, onClose, accent }) {
                 transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-stone-100 to-stone-200">
+              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-stone-800 to-stone-900">
                 <motion.i
-                  className={`${accent?.icon || 'ri-code-box-fill'} text-8xl text-stone-300`}
+                  className={`${accent?.icon || 'ri-code-box-fill'} text-8xl text-stone-600`}
                   initial={{ scale: 0, rotate: -10 }}
                   animate={{ scale: 1, rotate: 0 }}
                   transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
@@ -136,7 +136,7 @@ function ProjectPopup({ project, onClose, accent }) {
           <div className="w-full md:w-[40%] p-6 md:p-8 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] relative">
             {/* Close Button */}
             <motion.button
-              className="absolute top-4 right-4 w-9 h-9 rounded-full bg-stone-100 text-stone-500 hover:bg-stone-200 hover:text-stone-700 transition-colors flex items-center justify-center"
+              className="absolute top-4 right-4 w-9 h-9 rounded-full bg-elevated text-txt-muted hover:bg-alt hover:text-txt-secondary transition-colors flex items-center justify-center"
               onClick={onClose}
               whileHover={{ rotate: 90, scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -147,7 +147,7 @@ function ProjectPopup({ project, onClose, accent }) {
 
             {/* Card label */}
             <motion.div
-              className="flex items-center gap-2 text-stone-400 text-[0.65rem] uppercase tracking-[0.15em] mb-3"
+              className="flex items-center gap-2 text-txt-muted text-[0.65rem] uppercase tracking-[0.15em] mb-3"
               variants={contentVariants}
             >
               <i className={`${accent?.icon || 'ri-folder-3-fill'} ${accent?.color || 'text-amber-500'} text-sm`}></i>
@@ -156,7 +156,7 @@ function ProjectPopup({ project, onClose, accent }) {
 
             {/* Project Title */}
             <motion.h2
-              className="font-serif text-2xl md:text-3xl font-normal text-stone-900 mb-4 pr-10"
+              className="font-serif text-2xl md:text-3xl font-normal text-txt mb-4 pr-10"
               variants={contentVariants}
             >
               {project.name}
@@ -186,11 +186,11 @@ function ProjectPopup({ project, onClose, accent }) {
 
             {/* About */}
             <motion.div className="mb-5" variants={contentVariants}>
-              <h3 className="flex items-center gap-2 text-stone-400 text-xs uppercase tracking-[0.1em] mb-2">
+              <h3 className="flex items-center gap-2 text-txt-muted text-xs uppercase tracking-[0.1em] mb-2">
                 <i className="ri-information-line text-blue-500"></i>
                 About
               </h3>
-              <p className="text-stone-600 leading-relaxed text-sm">
+              <p className="text-txt-secondary leading-relaxed text-sm">
                 {project.details?.longDescription || project.description}
               </p>
             </motion.div>
@@ -198,7 +198,7 @@ function ProjectPopup({ project, onClose, accent }) {
             {/* Features */}
             {project.details?.features && (
               <motion.div className="mb-5" variants={contentVariants}>
-                <h3 className="flex items-center gap-2 text-stone-400 text-xs uppercase tracking-[0.1em] mb-2">
+                <h3 className="flex items-center gap-2 text-txt-muted text-xs uppercase tracking-[0.1em] mb-2">
                   <i className="ri-star-line text-amber-500"></i>
                   Key Features
                 </h3>
@@ -206,7 +206,7 @@ function ProjectPopup({ project, onClose, accent }) {
                   {project.details.features.map((feature, i) => (
                     <motion.li
                       key={i}
-                      className="flex items-start gap-2 text-stone-600 text-sm"
+                      className="flex items-start gap-2 text-txt-secondary text-sm"
                       variants={featureVariants}
                       initial="hidden"
                       animate="visible"
@@ -228,11 +228,11 @@ function ProjectPopup({ project, onClose, accent }) {
             {/* Design Notes */}
             {project.details?.designNotes && (
               <motion.div className="mb-6" variants={contentVariants}>
-                <h3 className="flex items-center gap-2 text-stone-400 text-xs uppercase tracking-[0.1em] mb-2">
+                <h3 className="flex items-center gap-2 text-txt-muted text-xs uppercase tracking-[0.1em] mb-2">
                   <i className="ri-pencil-ruler-2-line text-purple-500"></i>
                   Design Notes
                 </h3>
-                <p className="text-stone-600 leading-relaxed text-sm">
+                <p className="text-txt-secondary leading-relaxed text-sm">
                   {project.details.designNotes}
                 </p>
               </motion.div>
@@ -240,7 +240,7 @@ function ProjectPopup({ project, onClose, accent }) {
 
             {/* Action Buttons */}
             <motion.div
-              className="flex items-center gap-3 pt-5 border-t border-stone-100"
+              className="flex items-center gap-3 pt-5 border-t border-bdr-light"
               variants={contentVariants}
             >
               {project.githubRepo && (
@@ -248,7 +248,7 @@ function ProjectPopup({ project, onClose, accent }) {
                   href={project.githubRepo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-stone-900 text-white rounded-lg text-sm font-medium hover:bg-stone-800 transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-btn-primary text-btn-primary-text rounded-lg text-sm font-medium hover:bg-btn-primary-hover transition-colors duration-150"
                   whileHover={{ scale: 1.03, y: -1 }}
                   whileTap={{ scale: 0.97 }}
                 >
@@ -261,7 +261,7 @@ function ProjectPopup({ project, onClose, accent }) {
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-stone-200 text-stone-700 rounded-lg text-sm font-medium hover:bg-stone-50 hover:border-stone-300 transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-surface border border-bdr text-txt-secondary rounded-lg text-sm font-medium hover:bg-elevated hover:border-bdr-strong transition-colors duration-150"
                   whileHover={{ scale: 1.03, y: -1 }}
                   whileTap={{ scale: 0.97 }}
                 >

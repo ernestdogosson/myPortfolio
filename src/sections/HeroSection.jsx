@@ -1,20 +1,7 @@
 import { motion } from "framer-motion";
 import profilePic from "../assets/profilePic.jpg";
 
-/**
- * HeroSection with page-load animations
- *
- * Animations added:
- * - Profile image: Scale up + fade with blur effect (creates focus)
- * - Name: Slide up + fade with slight delay (draws attention)
- * - Role badge: Fade in after name (hierarchy)
- * - Bio text: Gentle fade in (readable entrance)
- * - Location: Slide up from below
- * - CTA buttons: Staggered slide up (encourages action)
- * - Scroll indicator: Maintained bounce with delayed entrance
- */
 function HeroSection() {
-  // Staggered animation container
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -26,7 +13,6 @@ function HeroSection() {
     },
   };
 
-  // Individual item animations
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
@@ -39,7 +25,6 @@ function HeroSection() {
     },
   };
 
-  // Profile image specific animation
   const profileVariants = {
     hidden: { opacity: 0, scale: 0.8, filter: "blur(10px)" },
     visible: {
@@ -53,7 +38,6 @@ function HeroSection() {
     },
   };
 
-  // Button hover animation
   const buttonHover = {
     scale: 1.02,
     transition: { type: "spring", stiffness: 400, damping: 25 },
@@ -72,9 +56,16 @@ function HeroSection() {
         initial="hidden"
         animate="visible"
       >
-        {/* Profile Image */}
-        <motion.div className="mb-8 inline-block" variants={profileVariants}>
-          <div className="w-64 h-64 rounded-full overflow-hidden border-2 border-stone-200 shadow-lg">
+        {/* Profile Image with blue glow */}
+        <motion.div
+          className="mb-8 inline-block relative"
+          variants={profileVariants}
+        >
+          <div
+            className="absolute inset-0 rounded-full blur-[50px] opacity-25 scale-110"
+            style={{ background: "#3b82f6" }}
+          />
+          <div className="relative w-64 h-64 rounded-full overflow-hidden border-2 border-bdr shadow-lg ring-1 ring-white/5">
             <img
               src={profilePic}
               alt="Ernest Dogo"
@@ -83,53 +74,38 @@ function HeroSection() {
           </div>
         </motion.div>
 
-        {/* Name with green accent dot */}
+        {/* Name with blue accent dot */}
         <motion.h1
-          className="font-serif text-5xl md:text-6xl lg:text-7xl font-normal text-stone-900 mb-4 tracking-tight"
+          className="font-serif text-5xl md:text-6xl lg:text-7xl font-normal text-txt mb-4 tracking-tight"
           variants={itemVariants}
         >
-          <motion.span
-            className="inline-block w-3 h-3 bg-green-500 rounded-full mr-3 mb-1"
-            animate={{
-              boxShadow: [
-                "0 0 0 0 rgba(34, 197, 94, 0.4)",
-                "0 0 0 8px rgba(34, 197, 94, 0)",
-              ],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeOut",
-              delay: 1,
-            }}
-          />
+          <span className="inline-block w-3 h-3 bg-accent rounded-full mr-3 mb-1" />
           Ernest Dogo
         </motion.h1>
 
         {/* Role */}
         <motion.p
-          className="text-sm font-medium text-stone-500 uppercase tracking-[0.2em] mb-6"
+          className="text-sm font-medium text-cyan-400 uppercase tracking-[0.2em] mb-6"
           variants={itemVariants}
         >
-          Frontend Developer
+          Fullstack Developer
         </motion.p>
 
-        {/* Bio - more personality */}
+        {/* Bio */}
         <motion.p
-          className="text-lg text-stone-600 leading-relaxed mb-8 max-w-lg mx-auto"
+          className="text-lg text-txt-secondary leading-relaxed mb-8 max-w-lg mx-auto"
           variants={itemVariants}
         >
-          I craft clean interfaces and thoughtful experiences. Currently
-          building with React, learning every day, and coaching football on the
-          side.
+          From pixel to API, I build web applications with React, JavaScript,
+          Tailwind CSS, and an eye for clean, maintainable code.
         </motion.p>
 
         {/* Location */}
         <motion.div
-          className="flex items-center justify-center gap-2 text-stone-500 text-sm mb-10"
+          className="flex items-center justify-center gap-2 text-txt-muted text-sm mb-10"
           variants={itemVariants}
         >
-          <i className="ri-map-pin-2-fill text-blue-500"></i>
+          <i className="ri-map-pin-2-fill text-rose-400"></i>
           <span>Helsingborg, Sweden</span>
         </motion.div>
 
@@ -140,7 +116,7 @@ function HeroSection() {
         >
           <motion.a
             href="#portfolio"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-stone-900 text-white rounded-xl text-sm font-medium hover:bg-stone-800 transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-btn-primary text-btn-primary-text rounded-xl text-sm font-medium hover:bg-btn-primary-hover transition-colors duration-150"
             whileHover={buttonHover}
             whileTap={buttonTap}
           >
@@ -149,7 +125,7 @@ function HeroSection() {
           </motion.a>
           <motion.a
             href="#contact"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-stone-200 text-stone-700 rounded-xl text-sm font-medium hover:border-stone-300 hover:bg-stone-50 transition-colors"
+            className="glass-card inline-flex items-center gap-2 px-6 py-3 text-txt-secondary rounded-xl text-sm font-medium"
             whileHover={buttonHover}
             whileTap={buttonTap}
           >
@@ -166,7 +142,7 @@ function HeroSection() {
           transition={{ delay: 1.5, duration: 0.5 }}
         >
           <motion.i
-            className="ri-arrow-down-line text-stone-400 text-xl"
+            className="ri-arrow-down-line text-txt-muted text-xl"
             animate={{ y: [0, 8, 0] }}
             transition={{
               duration: 1.5,

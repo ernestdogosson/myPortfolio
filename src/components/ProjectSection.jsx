@@ -25,7 +25,7 @@ function ProjectSection() {
   const [direction, setDirection] = useState(0);
 
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const isInView = useInView(sectionRef, { once: true, margin: "-70% 0px 0px 0px" });
 
   const project = ProjectsData[activeIndex];
   const accent = accents[activeIndex % accents.length];
@@ -49,7 +49,7 @@ function ProjectSection() {
   };
 
   const fadeUp = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0 },
   };
 
@@ -76,14 +76,14 @@ function ProjectSection() {
         variants={fadeUp}
         transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
       >
-        <div className="inline-flex items-center gap-2 text-stone-400 text-xs uppercase tracking-[0.15em] mb-4">
-          <i className="ri-folder-3-fill text-amber-500 text-base"></i>
+        <div className="inline-flex items-center gap-2 text-txt-muted text-xs uppercase tracking-[0.15em] mb-4">
+          <i className="ri-folder-3-fill text-amber-400 text-base"></i>
           <span>Selected Work</span>
         </div>
-        <h2 className="font-serif text-4xl md:text-5xl font-normal text-stone-900 mb-4">
+        <h2 className="font-serif text-4xl md:text-5xl font-normal text-txt mb-4">
           Projects
         </h2>
-        <p className="text-stone-500 max-w-lg text-lg mx-auto">
+        <p className="text-txt-muted max-w-lg text-lg mx-auto">
           A collection of things I've built while learning and growing as a
           developer.
         </p>
@@ -97,29 +97,29 @@ function ProjectSection() {
         variants={fadeUp}
         transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
       >
-        <div className="bg-white rounded-3xl border border-stone-200 overflow-hidden shadow-sm">
+        <div className="glass-card rounded-3xl overflow-hidden shadow-sm">
           {/* Browser Chrome */}
-          <div className="flex items-center justify-between px-4 py-3 bg-stone-50 border-b border-stone-200">
+          <div className="flex items-center justify-between px-4 py-3 bg-elevated border-b border-bdr">
             <div className="flex items-center gap-2">
               <div className="flex gap-1.5">
                 <span className="w-3 h-3 rounded-full bg-red-400"></span>
                 <span className="w-3 h-3 rounded-full bg-amber-400"></span>
                 <span className="w-3 h-3 rounded-full bg-green-400"></span>
               </div>
-              <span className="ml-4 text-xs text-stone-400 font-medium">
+              <span className="ml-4 text-xs text-txt-muted font-medium">
                 {project.name}
               </span>
             </div>
 
             {/* View Toggle */}
             {project.liveUrl && (
-              <div className="flex items-center gap-1 bg-stone-100 rounded-lg p-1">
+              <div className="flex items-center gap-1 bg-alt rounded-lg p-1">
                 <button
                   onClick={() => setShowLive(false)}
                   className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
                     !showLive
-                      ? "bg-white text-stone-800 shadow-sm"
-                      : "text-stone-500 hover:text-stone-700"
+                      ? "bg-surface text-txt shadow-sm"
+                      : "text-txt-muted hover:text-txt-secondary"
                   }`}
                 >
                   <i className="ri-image-line mr-1"></i>
@@ -129,8 +129,8 @@ function ProjectSection() {
                   onClick={() => setShowLive(true)}
                   className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
                     showLive
-                      ? "bg-white text-stone-800 shadow-sm"
-                      : "text-stone-500 hover:text-stone-700"
+                      ? "bg-surface text-txt shadow-sm"
+                      : "text-txt-muted hover:text-txt-secondary"
                   }`}
                 >
                   <i className="ri-play-circle-line mr-1"></i>
@@ -141,7 +141,7 @@ function ProjectSection() {
           </div>
 
           {/* Preview Area */}
-          <div className="relative h-[500px] md:h-[600px] bg-stone-100 overflow-hidden">
+          <div className="relative h-[350px] md:h-[420px] bg-elevated overflow-hidden">
             <AnimatePresence mode="wait" custom={direction}>
               {showLive && project.liveUrl ? (
                 <motion.iframe
@@ -172,9 +172,9 @@ function ProjectSection() {
                       style={{ backgroundImage: `url(${project.bgImage})` }}
                     />
                   ) : (
-                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-stone-100 to-stone-200">
+                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-stone-800 to-stone-900">
                       <i
-                        className={`${accent.icon} text-9xl text-stone-300`}
+                        className={`${accent.icon} text-9xl text-stone-600`}
                       ></i>
                     </div>
                   )}
@@ -184,7 +184,7 @@ function ProjectSection() {
           </div>
 
           {/* Project Info */}
-          <div className="p-5 md:p-6 border-t border-stone-100">
+          <div className="p-5 md:p-6 border-t border-bdr-light">
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
                 key={activeIndex}
@@ -197,10 +197,10 @@ function ProjectSection() {
               >
                 {/* Title + Description */}
                 <div className="mb-4">
-                  <h3 className="font-serif text-xl md:text-2xl font-normal text-stone-900 mb-2">
+                  <h3 className="font-serif text-xl md:text-2xl font-normal text-txt mb-2">
                     {project.name}
                   </h3>
-                  <p className="text-stone-500 text-sm md:text-base line-clamp-2">
+                  <p className="text-txt-muted text-sm md:text-base line-clamp-2">
                     {project.projectDescription}
                   </p>
                 </div>
@@ -227,7 +227,7 @@ function ProjectSection() {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => setIsModalOpen(true)}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-stone-900 text-white rounded-lg text-sm font-medium hover:bg-stone-800 transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-btn-primary text-btn-primary-text rounded-lg text-sm font-medium hover:bg-btn-primary-hover transition-colors duration-150"
                     >
                       <i className="ri-article-line text-xs"></i>
                       Details
@@ -237,7 +237,7 @@ function ProjectSection() {
                         href={project.githubRepo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-stone-200 text-stone-700 rounded-lg text-sm font-medium hover:bg-stone-50 hover:border-stone-300 transition-colors"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-surface border border-bdr text-txt-secondary rounded-lg text-sm font-medium hover:bg-elevated hover:border-bdr-strong transition-colors duration-150"
                       >
                         <i className="ri-github-fill text-xs"></i>
                         Code
@@ -254,14 +254,14 @@ function ProjectSection() {
         <button
           onClick={goPrev}
           aria-label="Previous project"
-          className="absolute -left-4 md:-left-5 top-[250px] md:top-[300px] w-10 h-10 md:w-12 md:h-12 rounded-full bg-white border border-stone-200 shadow-lg flex items-center justify-center text-stone-600 hover:bg-stone-50 hover:border-stone-300 hover:scale-110 transition-all z-10"
+          className="absolute -left-4 md:-left-5 top-[250px] md:top-[300px] w-10 h-10 md:w-12 md:h-12 rounded-full glass-card shadow-lg flex items-center justify-center text-txt-secondary hover:scale-110 transition-transform duration-150 z-10"
         >
           <i className="ri-arrow-left-s-line text-xl"></i>
         </button>
         <button
           onClick={goNext}
           aria-label="Next project"
-          className="absolute -right-4 md:-right-5 top-[250px] md:top-[300px] w-10 h-10 md:w-12 md:h-12 rounded-full bg-white border border-stone-200 shadow-lg flex items-center justify-center text-stone-600 hover:bg-stone-50 hover:border-stone-300 hover:scale-110 transition-all z-10"
+          className="absolute -right-4 md:-right-5 top-[250px] md:top-[300px] w-10 h-10 md:w-12 md:h-12 rounded-full glass-card shadow-lg flex items-center justify-center text-txt-secondary hover:scale-110 transition-transform duration-150 z-10"
         >
           <i className="ri-arrow-right-s-line text-xl"></i>
         </button>
@@ -274,10 +274,10 @@ function ProjectSection() {
             key={index}
             onClick={() => goTo(index)}
             style={{ width: "112px", height: "63px" }}
-            className={`relative rounded-xl overflow-hidden border-2 transition-all duration-300 bg-stone-100 ${
+            className={`relative rounded-xl overflow-hidden border-2 transition-all duration-150 bg-elevated ${
               index === activeIndex
-                ? "border-stone-800 shadow-lg"
-                : "border-stone-200 opacity-50 hover:opacity-100 hover:border-stone-300"
+                ? "border-stone-400 shadow-lg"
+                : "border-bdr opacity-50 hover:opacity-100 hover:border-bdr-strong"
             }`}
           >
             {proj.bgImage ? (
@@ -287,9 +287,9 @@ function ProjectSection() {
                 className="absolute top-0 left-0 w-full h-full object-cover"
               />
             ) : (
-              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-stone-100 to-stone-200 flex items-center justify-center">
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-stone-800 to-stone-900 flex items-center justify-center">
                 <i
-                  className={`${accents[index % accents.length].icon} text-xl text-stone-400`}
+                  className={`${accents[index % accents.length].icon} text-xl text-stone-500`}
                 ></i>
               </div>
             )}

@@ -1,47 +1,87 @@
-import travleAgency from "../assets/travelAgency.png";
-import wordGame from "../assets/word-game.png";
+import wordTyping from "../assets/wordTyping.png";
 import movieLibrary from "../assets/movieLibrary.png";
+import pokemon from "../assets/pokemon.png";
+import tatoo from "../assets/tatoo.png";
+import travelAgency from "../assets/travleAgency.png";
 
 const ProjectsData = [
   {
-    name: "Travel Agency Website",
-    githubRepo: "https://github.com/ernestdogosson/assignment-15",
-    liveUrl: "https://ernestdogosson.github.io/assignment-15/",
-    techStack: ["HTML", "Bootstrap", "CSS"],
+    name: "Pokémon Guessing Game",
+    githubRepo: "https://github.com/ernestdogosson/group-project-game",
+    liveUrl: "https://pokewho-guess.netlify.app/",
+    techStack: ["React", "Vite", "CSS", "PokeAPI"],
     projectDescription:
-      "Responsive travel agency showcasing destinations and packages.",
+      "A group project where players identify Pokémon from their silhouettes before time runs out.",
 
     projectInfo:
-      "Explore destinations, view packages, and navigate About, Services, Gallery, and Contact sections.",
+      "View a Pokémon shadow and pick the correct name from four options. Tracks score, streaks, and personal bests across difficulty levels.",
 
     skillsLearned:
-      "Multi-section layouts, Bootstrap grid utilities, and responsive design techniques.",
+      "React state management, API integration, collaborative Git workflows, audio handling, and user authentication.",
 
     challenges:
-      "Layout alignment, optimized spacing and responsiveness across all pages.",
+      "Coordinating as a team with Git, syncing game state with UI, managing audio playback, and integrating the PokeAPI.",
 
-    bgImage: travleAgency,
+    bgImage: pokemon,
 
     details: {
       longDescription:
-        "A fully responsive multi-page travel agency website built using HTML, CSS, and Bootstrap. The site includes a structured layout with dedicated pages for destinations, services, gallery, and contact forms. It was designed to mimic a real-world commercial landing page while practicing modular section design.",
+        "A web-based educational game built as a group project using React and Vite. Players test their Pokémon knowledge by identifying silhouettes under time pressure. The game fetches real Pokémon data from the PokeAPI and includes features like difficulty levels, score tracking, background music, and user accounts to save progress.",
 
       features: [
-        "Multi-page structure with navbar routing",
-        "Image gallery with responsive grid",
-        "Contact form layout",
-        "Custom color scheme and typography",
+        "Silhouette-based Pokémon guessing gameplay",
+        "Multiple difficulty levels with varying time limits",
+        "Score tracking with streaks and personal bests",
+        "Audio system with background music and sound effects",
+        "User accounts to save progress",
       ],
 
       designNotes:
-        "Used Bootstrap utilities to keep the layout flexible and consistent. Focused on spacing, structure, and creating a clean visual hierarchy.",
+        "Built collaboratively with a focus on component reusability and separation of concerns. Gained hands-on experience with team-based Git workflows and code review.",
+    },
+  },
+
+  {
+    name: "Ink & Soul Tattoo Studio",
+    githubRepo:
+      "https://github.com/ernestdogosson/TattooStudioWebsite--Ink-Soul",
+    liveUrl: "https://ernestdogosson.github.io/TattooStudioWebsite--Ink-Soul",
+    techStack: ["HTML", "CSS", "SVG"],
+    projectDescription:
+      "A dark-themed multi-page business website for a fictional tattoo studio.",
+
+    projectInfo:
+      "Four-page site with Home, About, Gallery, and Contact sections. Features custom SVG logo design and responsive layouts.",
+
+    skillsLearned:
+      "Multi-page navigation, custom SVG graphics with gradients, CSS Grid and Flexbox, responsive design, and collaborative Git workflows.",
+
+    challenges:
+      "Creating a cohesive dark aesthetic, designing custom SVG logos, and coordinating page styles across team members.",
+
+    bgImage: tatoo,
+
+    details: {
+      longDescription:
+        "A professional multi-page website built for a fictional tattoo studio as a group project. The site features a dark, moody aesthetic with custom SVG logo design, responsive layouts using CSS Grid and Flexbox, and professional typography with three complementary fonts. Built with pure HTML and CSS to demonstrate strong fundamentals.",
+
+      features: [
+        "Custom SVG logo with gradient effects",
+        "Dark theme aesthetic suited to the tattoo industry",
+        "Responsive design across mobile, tablet, and desktop",
+        "Professional typography with Kaushan Script, New Rocker, and Roboto",
+        "Contact form and social media integration",
+      ],
+
+      designNotes:
+        "Focused on creating a visually cohesive brand identity through custom SVG work, dark color palettes, and carefully chosen typography. Practiced collaborative development with structured CSS organization.",
     },
   },
 
   {
     name: "Word Typing Game",
     githubRepo: "https://github.com/ernestdogosson/js-07",
-    liveUrl: "https://ernestdogosson.github.io/js-07/", // Add your live URL
+    liveUrl: "https://kboardblitz.netlify.app/",
     techStack: ["HTML", "CSS", "JavaScript"],
     projectDescription: "Fast-paced typing game with timer challenges.",
 
@@ -54,7 +94,7 @@ const ProjectsData = [
     challenges:
       "Timer resets, score tracking, input detection, and UI state synchronization.",
 
-    bgImage: wordGame,
+    bgImage: wordTyping,
 
     details: {
       longDescription:
@@ -73,45 +113,9 @@ const ProjectsData = [
   },
 
   {
-    name: "Portfolio Website",
-    githubRepo: "https://github.com/ernestdogosson/react-01",
-    liveUrl: "https://ernestdogosson.github.io/react-01/", // Add your live URL
-    techStack: ["React", "React Router", "Tailwind CSS"],
-    projectDescription:
-      "Personal portfolio website with multi-page navigation.",
-
-    projectInfo:
-      "Professional portfolio showcasing projects, skills, and contact information with smooth routing and modern design.",
-
-    skillsLearned:
-      "React Router implementation, component architecture, responsive design with Tailwind, and state management.",
-
-    challenges:
-      "Setting up routing structure, component organization, and maintaining consistent design across pages.",
-
-    bgImage: null,
-
-    details: {
-      longDescription:
-        "A modern, fully responsive portfolio website built with React and React Router. Features smooth page navigation, project showcase with filtering, about section, and contact form. Demonstrates professional frontend development skills with clean component architecture and modern design patterns.",
-
-      features: [
-        "Multi-page SPA with React Router",
-        "Dynamic project filtering and search",
-        "Responsive design for all devices",
-        "Component-based architecture",
-        "Modern UI with Tailwind CSS",
-      ],
-
-      designNotes:
-        "Focused on clean, maintainable code structure and professional presentation. Used React Router for seamless navigation and Tailwind for rapid, consistent styling.",
-    },
-  },
-
-  {
     name: "Movie Library App",
     githubRepo: "https://github.com/ernestdogosson/js-06",
-    liveUrl: "https://ernestdogosson.github.io/movieLibraryApp/", // Add your live URL
+    liveUrl: "https://ernestdogosson.github.io/movieLibraryApp/",
     techStack: ["JavaScript", "HTML", "CSS"],
     projectDescription: "Track and organize your movie collection.",
 
@@ -143,37 +147,40 @@ const ProjectsData = [
   },
 
   {
-    name: "Coming Soon",
-    githubRepo: null,
-    liveUrl: null,
-    techStack: ["React", "Node.js", "MongoDB"],
-    projectDescription: "New project in development.",
+    name: "Bhromaon Travel Agency",
+    githubRepo:
+      "https://github.com/ernestdogosson/travel-agency-website--bharomaon",
+    liveUrl:
+      "https://ernestdogosson.github.io/travel-agency-website--bharomaon/",
+    techStack: ["HTML", "SCSS", "JavaScript"],
+    projectDescription:
+      "A responsive multi-section travel agency website with clean SCSS architecture.",
 
     projectInfo:
-      "Details coming soon. This space is reserved for an upcoming project.",
+      "Features a hero section with search, destination cards, testimonials, and a mobile hamburger menu with smooth scrolling navigation.",
 
     skillsLearned:
-      "Full-stack development, database design, and API integration.",
+      "SCSS 7-1 architecture, Sass variables and mixins, responsive design with Flexbox and Grid, and hamburger menu animations.",
 
     challenges:
-      "Building scalable architecture and implementing modern best practices.",
+      "Organizing SCSS with the 7-1 pattern, building a responsive hamburger menu, and maintaining consistent styling across sections.",
 
-    bgImage: null,
-    bgSize: "cover",
+    bgImage: travelAgency,
 
     details: {
       longDescription:
-        "This project is currently in development. Check back soon for updates on this exciting new addition to the portfolio.",
+        "A multi-section travel agency website focused on clean SCSS architecture using the 7-1 folder pattern. The site features a hero section with integrated search, destination cards, a testimonials showcase, and smooth scrolling navigation. Built to practice structured Sass workflows and responsive design.",
 
       features: [
-        "Feature details coming soon",
-        "Modern tech stack",
-        "Responsive design",
-        "Performance optimized",
+        "Hero section with integrated search functionality",
+        "Hamburger menu with toggle animation for mobile",
+        "Destination cards with responsive layouts",
+        "Testimonials showcase section",
+        "Smooth scrolling navigation",
       ],
 
       designNotes:
-        "Design documentation will be added once the project reaches its first milestone.",
+        "Focused on organized SCSS practices with the 7-1 architecture pattern, using variables, mixins, and partials for maintainable styling. Practiced responsive design with CSS Grid and Flexbox.",
     },
   },
 ];

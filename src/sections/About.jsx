@@ -36,7 +36,7 @@ function About() {
 
   return (
     <section id="about" className="py-24 md:py-32 px-6" ref={sectionRef}>
-      <div className="max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-16 md:items-center">
+      <div className="max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-16">
         {/* Left column — heading, bio, stats */}
         <motion.div
           initial="hidden"
@@ -54,9 +54,9 @@ function About() {
           <div className="space-y-4 text-txt-secondary leading-relaxed mb-10">
             <p>
               I came to web development through an unusual path: a Geography
-              degree, a Master's in Geomatics, and years of working with
-              spatial data and mapping systems. That background shaped how I
-              think about structuring information and building interfaces.
+              degree, a Master's in Geomatics, and a GIS internship along the
+              way. That background shaped how I think about structuring
+              information and building interfaces.
             </p>
             <p>
               I completed a backend-focused Yrkeshögskola program in 2026,
@@ -74,7 +74,7 @@ function About() {
 
         {/* Right column — icon list, no dots or connecting line */}
         <motion.div
-          className="space-y-8"
+          className="space-y-8 md:mt-24"
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={fadeUp}

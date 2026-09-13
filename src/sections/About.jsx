@@ -117,7 +117,7 @@ function About() {
             { icon: "ri-database-2-fill", label: "PostgreSQL", color: "text-sky-400" },
             { icon: "ri-ship-2-fill", label: "Docker", color: "text-blue-400" },
             { icon: "ri-git-branch-fill", label: "Git", color: "text-orange-400" },
-            { icon: "ri-sass-fill", label: "SCSS", color: "text-pink-400" },
+            { icon: "ri-file-code-fill", label: "SCSS", color: "text-pink-400" },
           ].map((skill) => (
             <motion.div
               key={skill.label}

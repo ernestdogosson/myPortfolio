@@ -1,6 +1,7 @@
 import pokemon from "../assets/pokemon.jpg";
 import travelAgency from "../assets/travleAgency.jpg";
 import pitchsideScores from "../assets/pitchside-scores.jpg";
+import employeeScheduling from "../assets/employee-scheduling.jpg";
 
 const ProjectsData = [
   {
@@ -42,7 +43,7 @@ const ProjectsData = [
   {
     name: "Employee Scheduling App",
     githubRepo: "https://github.com/ernestdogosson/employee-scheduling-app",
-    liveUrl: "",
+    liveUrl: "https://employee-scheduling-app-eight.vercel.app/",
     techStack: ["React", "TypeScript", "Vite", "Tailwind", "Express", "Prisma", "PostgreSQL", "Zod", "JWT"],
     projectDescription:
       "A role-based scheduling tool: employers add staff and assign shifts, employees mark their availability.",
@@ -56,7 +57,7 @@ const ProjectsData = [
     challenges:
       "Designing a relational schema that prevents double-booking: composite uniqueness constraints on employee, date, and shift enforce that at the database level rather than trusting application logic alone.",
 
-    bgImage: null,
+    bgImage: employeeScheduling,
 
     details: {
       longDescription:

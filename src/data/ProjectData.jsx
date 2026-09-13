@@ -1,11 +1,12 @@
 import pokemon from "../assets/pokemon.jpg";
 import travelAgency from "../assets/travleAgency.jpg";
+import pitchsideScores from "../assets/pitchside-scores.jpg";
 
 const ProjectsData = [
   {
     name: "Pitchside Scores",
     githubRepo: "https://github.com/ernestdogosson/pitchside-scores",
-    liveUrl: "https://pitchside-scores-backend.onrender.com",
+    liveUrl: "https://pitchside-scores-frontend.vercel.app/",
     techStack: ["React", "Vite", "Tailwind", "Express", "Prisma", "PostgreSQL", "Auth0", "Docker", "GitHub Actions"],
     projectDescription:
       "A scoreboard for amateur football matches, built around a crowd-reported consensus score instead of a single referee.",
@@ -19,7 +20,7 @@ const ProjectsData = [
     challenges:
       "A split Vercel-frontend/Render-backend deploy broke on session cookies (Chrome blocks third-party cookies by default), so the app was collapsed into a single-origin Render deployment to eliminate the cross-origin surface entirely.",
 
-    bgImage: null,
+    bgImage: pitchsideScores,
 
     details: {
       longDescription:

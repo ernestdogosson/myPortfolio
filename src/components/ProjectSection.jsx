@@ -51,8 +51,7 @@ function ProjectSection() {
           </h2>
         </div>
         <p className="text-txt-muted text-lg max-w-xs md:text-right">
-          A selection of things I've built while learning and growing as a
-          developer.
+          A selection of things I've built.
         </p>
       </motion.div>
 

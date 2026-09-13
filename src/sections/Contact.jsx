@@ -51,7 +51,7 @@ function Contact() {
 
   return (
     <section id="contact" className="section-alt py-24 md:py-32 px-6" ref={sectionRef}>
-      <div className="max-w-3xl mx-auto w-full">
+      <div className="max-w-5xl mx-auto w-full">
         {/* Section Header */}
         <motion.div
           className="mb-12 text-center md:text-left"
@@ -67,7 +67,7 @@ function Contact() {
           <h2 className="font-serif text-4xl md:text-5xl font-normal text-txt mb-4 leading-[1.05] tracking-[-0.015em]">
             Let's Connect
           </h2>
-          <p className="text-txt-muted text-lg">
+          <p className="text-txt-muted text-lg max-w-md mx-auto md:mx-0">
             Interested in working together? I'd love to hear from you.
           </p>
         </motion.div>

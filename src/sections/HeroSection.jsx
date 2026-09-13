@@ -38,7 +38,7 @@ function HeroSection() {
 
   return (
     <section
-      className="relative min-h-screen flex items-center px-6 pt-32 pb-20 md:pt-20"
+      className="relative min-h-screen flex items-center px-6 pt-20"
       id="home"
     >
       <div className="max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr] items-center gap-12">

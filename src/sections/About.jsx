@@ -36,7 +36,7 @@ function About() {
 
   return (
     <section id="about" className="py-24 md:py-32 px-6" ref={sectionRef}>
-      <div className="max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-16">
+      <div className="max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-16 md:items-center">
         {/* Left column — heading, bio, stats */}
         <motion.div
           initial="hidden"
@@ -81,8 +81,8 @@ function About() {
           transition={{ ...springSettle, delay: 0.15 }}
         >
           {timelineItems.map((item) => (
-            <div key={item.title} className="flex gap-4">
-              <i className={`${item.icon} text-accent text-2xl shrink-0`}></i>
+            <div key={item.title} className="flex gap-3">
+              <i className={`${item.icon} text-accent text-base shrink-0 mt-1`}></i>
               <div>
                 <p className="text-txt font-medium">{item.title}</p>
                 <p className="text-txt-secondary text-sm">{item.subtitle}</p>

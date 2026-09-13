@@ -41,7 +41,7 @@ function HeroSection() {
       className="relative min-h-screen flex items-center px-6 pt-20"
       id="home"
     >
-      <div className="max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr] items-center gap-12">
+      <div className="max-w-4xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 items-center gap-8 md:gap-6">
         {/* Text column — left-aligned, not centered */}
         <motion.div
           className="order-2 md:order-1 text-center md:text-left"
@@ -70,7 +70,7 @@ function HeroSection() {
 
           {/* Bio */}
           <motion.p
-            className="text-lg text-txt-secondary leading-relaxed mb-6 max-w-md mx-auto md:mx-0"
+            className="text-lg text-txt-secondary leading-relaxed mb-6 max-w-md md:max-w-none mx-auto md:mx-0"
             variants={itemVariants}
           >
             I build fullstack web applications end to end — React and Tailwind
@@ -114,7 +114,7 @@ function HeroSection() {
 
         {/* Photo column */}
         <motion.div
-          className="order-1 md:order-2 flex justify-center md:justify-end"
+          className="order-1 md:order-2 flex justify-center"
           variants={profileVariants}
           initial="hidden"
           animate="visible"

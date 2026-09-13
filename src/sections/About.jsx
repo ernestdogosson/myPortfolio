@@ -3,9 +3,8 @@ import { motion, useInView } from "framer-motion";
 import { fadeUp, springSettle } from "../utils/motion.js";
 
 /**
- * About — asymmetric two-column layout. Left: heading, bio, stats.
- * Right: a connected vertical list (the "line + dot" device), echoing
- * the reference sites rather than another row of identical cards.
+ * About — asymmetric two-column layout. Left: heading and bio.
+ * Right: a simple icon list (education, background).
  */
 function About() {
   const sectionRef = useRef(null);
@@ -66,56 +65,32 @@ function About() {
             </p>
           </div>
 
-          {/* Stats */}
-          <div className="flex divide-x divide-bdr">
-            {[
-              { value: "4+", label: "Projects Shipped" },
-              { value: "3/4", label: "YH Modules Graded VG" },
-              { value: "2", label: "Languages Spoken" },
-            ].map((stat) => (
-              <div key={stat.label} className="flex-1 pr-4 first:pl-0 pl-4">
-                <p className="font-serif text-3xl md:text-4xl text-accent leading-none mb-1">
-                  {stat.value}
-                </p>
-                <p className="text-txt-muted text-xs uppercase tracking-[0.1em]">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          <p className="text-txt-muted text-sm mt-6 flex items-center gap-2">
+          <p className="text-txt-muted text-sm flex items-center gap-2">
             <i className="ri-music-2-fill text-accent"></i>
             Off the clock: guitar and writing music.
           </p>
         </motion.div>
 
-        {/* Right column — connected timeline */}
+        {/* Right column — icon list, no dots or connecting line */}
         <motion.div
-          className="relative pl-8"
+          className="space-y-8"
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={fadeUp}
           transition={{ ...springSettle, delay: 0.15 }}
         >
-          {/* The connecting line */}
-          <div className="absolute left-[7px] top-2 bottom-2 w-px bg-bdr" />
-
-          <div className="space-y-8">
-            {timelineItems.map((item) => (
-              <div key={item.title} className="relative">
-                <span className="absolute -left-8 top-1 w-3.5 h-3.5 rounded-full bg-accent ring-4 ring-page" />
-                <div className="flex items-center gap-2 text-txt-muted text-[0.65rem] uppercase tracking-[0.15em] mb-1.5">
-                  <i className={`${item.icon} text-accent text-sm`}></i>
-                </div>
+          {timelineItems.map((item) => (
+            <div key={item.title} className="flex gap-4">
+              <i className={`${item.icon} text-accent text-2xl shrink-0`}></i>
+              <div>
                 <p className="text-txt font-medium">{item.title}</p>
                 <p className="text-txt-secondary text-sm">{item.subtitle}</p>
                 {item.detail && (
                   <p className="text-txt-muted text-xs mt-0.5">{item.detail}</p>
                 )}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </motion.div>
       </div>
 

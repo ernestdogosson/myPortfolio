@@ -18,10 +18,11 @@
   --text-muted: #6b7280;
   --text-faint: #4b5563;
 
-  /* Accent — blue */
-  --accent: #3b82f6;
-  --accent-hover: #60a5fa;
-  --accent-subtle: rgba(59, 130, 246, 0.10);
+  /* Accent — one warm coral, used with restraint (buttons, the ring
+     motif, nav highlight) rather than washed across backgrounds. */
+  --accent: #ef6b4a;
+  --accent-hover: #f4855f;
+  --accent-subtle: rgba(239, 107, 74, 0.12);
 
   /* Border tokens */
   --border-primary: rgba(255, 255, 255, 0.08);
@@ -30,13 +31,18 @@
   --border-catchlight: rgba(255, 255, 255, 0.16);
 
   /* Button tokens */
-  --btn-primary-bg: #3b82f6;
+  --btn-primary-bg: #ef6b4a;
   --btn-primary-text: #ffffff;
-  --btn-primary-hover: #2563eb;
+  --btn-primary-hover: #f4855f;
 
   /* Nav tokens */
   --nav-bg: rgba(11, 15, 20, 0.85);
   --backdrop: rgba(0, 0, 0, 0.50);
+
+  /* A second neutral panel tone (not a color) so sections alternate
+     without introducing hue — the "breakage" between rooms comes from
+     value contrast, not color washing. */
+  --bg-page-alt: #0e1319;
 }
 
 * {
@@ -106,6 +112,34 @@ body::before {
     background-color: var(--btn-primary-bg);
     color: var(--btn-primary-text);
     transition: background-color 150ms ease, transform 150ms ease;
+  }
+
+  /* Signature shape — a glowing ring, reused wherever the site wants to
+     put its own visual signature (currently: behind the hero photo). */
+  .ring-motif {
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 40px 4px var(--accent-subtle);
+  }
+
+  /* Neutral alternate panel — a section tone shift with no color in it. */
+  .section-alt {
+    background-color: var(--bg-page-alt);
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  /* Skill logo tile — bordered icon square, replacing colored pill soup. */
+  .skill-tile {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-primary);
+    transition: border-color 150ms ease, background-color 150ms ease;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .skill-tile:hover {
+    border-color: var(--accent);
+    background-color: var(--bg-elevated);
   }
 }
 

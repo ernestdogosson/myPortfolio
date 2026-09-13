@@ -50,7 +50,7 @@ function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-24 md:py-32 px-6" ref={sectionRef}>
+    <section id="contact" className="section-alt py-24 md:py-32 px-6" ref={sectionRef}>
       <div className="max-w-3xl mx-auto w-full">
         {/* Section Header */}
         <motion.div

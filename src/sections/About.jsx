@@ -66,8 +66,32 @@ function About() {
           </div>
         </motion.div>
 
+        {/* Stats row */}
+        <motion.div
+          className="flex items-center justify-center divide-x divide-bdr mb-6"
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={fadeUp}
+          transition={{ ...springSettle, delay: 0.2 }}
+        >
+          {[
+            { value: "4+", label: "Projects Shipped" },
+            { value: "3/4", label: "YH Modules Graded VG" },
+            { value: "2", label: "Languages Spoken" },
+          ].map((stat) => (
+            <div key={stat.label} className="flex-1 text-center px-4">
+              <p className="font-serif text-4xl md:text-5xl text-accent leading-none mb-1">
+                {stat.value}
+              </p>
+              <p className="text-txt-muted text-xs uppercase tracking-[0.1em]">
+                {stat.label}
+              </p>
+            </div>
+          ))}
+        </motion.div>
+
         {/* Info Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Currently Learning */}
           <motion.div
             className="glass-card border-t-2 border-t-blue-500/50 rounded-2xl p-6"
@@ -125,63 +149,45 @@ function About() {
             </div>
           </motion.div>
 
-          {/* Tech Stack */}
-          <motion.div
-            className="glass-card border-t-2 border-t-amber-500/50 rounded-2xl p-6"
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            variants={fadeUp}
-            transition={springSettle}
-            whileHover={liftHover}
-          >
-            <div className="flex items-center gap-2 text-txt-muted text-[0.65rem] uppercase tracking-[0.15em] mb-4">
-              <i className="ri-tools-fill text-amber-500 text-sm"></i>
-              <span>Building With</span>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-orange-500/10 text-orange-400 rounded-lg text-sm font-medium">
-                <i className="ri-html5-fill"></i>
-                HTML
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-500/10 text-blue-400 rounded-lg text-sm font-medium">
-                <i className="ri-css3-fill"></i>
-                CSS
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-pink-500/10 text-pink-400 rounded-lg text-sm font-medium">
-                <i className="ri-sass-fill"></i>
-                SCSS
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-500/10 text-amber-400 rounded-lg text-sm font-medium">
-                <i className="ri-javascript-fill"></i>
-                JS
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-cyan-500/10 text-cyan-400 rounded-lg text-sm font-medium">
-                <i className="ri-reactjs-fill"></i>
-                React
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-teal-500/10 text-teal-400 rounded-lg text-sm font-medium">
-                <i className="ri-tailwind-css-fill"></i>
-                Tailwind
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-500/10 text-green-400 rounded-lg text-sm font-medium">
-                <i className="ri-nodejs-fill"></i>
-                Node.js
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-sky-500/10 text-sky-400 rounded-lg text-sm font-medium">
-                <i className="ri-database-2-fill"></i>
-                PostgreSQL
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-500/10 text-blue-400 rounded-lg text-sm font-medium">
-                <i className="ri-ship-2-fill"></i>
-                Docker
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-orange-500/10 text-orange-400 rounded-lg text-sm font-medium">
-                <i className="ri-git-branch-fill"></i>
-                Git
-              </span>
-            </div>
-          </motion.div>
         </div>
+
+        {/* Skills — logo grid instead of colored pills */}
+        <motion.div
+          className="mt-6"
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={fadeUp}
+          transition={{ ...springSettle, delay: 0.25 }}
+        >
+          <div className="flex items-center gap-2 text-txt-muted text-[0.65rem] uppercase tracking-[0.15em] mb-4 justify-center">
+            <i className="ri-tools-fill text-accent text-sm"></i>
+            <span>Building With</span>
+          </div>
+          <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
+            {[
+              { icon: "ri-html5-fill", label: "HTML", color: "text-orange-400" },
+              { icon: "ri-css3-fill", label: "CSS", color: "text-blue-400" },
+              { icon: "ri-javascript-fill", label: "JS", color: "text-amber-400" },
+              { icon: "ri-reactjs-fill", label: "React", color: "text-cyan-400" },
+              { icon: "ri-tailwind-css-fill", label: "Tailwind", color: "text-teal-400" },
+              { icon: "ri-nodejs-fill", label: "Node.js", color: "text-green-400" },
+              { icon: "ri-database-2-fill", label: "PostgreSQL", color: "text-sky-400" },
+              { icon: "ri-ship-2-fill", label: "Docker", color: "text-blue-400" },
+              { icon: "ri-git-branch-fill", label: "Git", color: "text-orange-400" },
+              { icon: "ri-sass-fill", label: "SCSS", color: "text-pink-400" },
+            ].map((skill) => (
+              <motion.div
+                key={skill.label}
+                className="skill-tile rounded-xl p-4 flex flex-col items-center gap-2"
+                whileHover={{ y: -3 }}
+                transition={springSettle}
+              >
+                <i className={`${skill.icon} ${skill.color} text-2xl`}></i>
+                <span className="text-txt-secondary text-xs">{skill.label}</span>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );

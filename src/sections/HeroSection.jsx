@@ -47,17 +47,18 @@ function HeroSection() {
         initial="hidden"
         animate="visible"
       >
-        {/* Profile Image with blue glow */}
+        {/* Profile Image with signature ring motif */}
         <motion.div
           className="mb-8 inline-block relative"
           variants={profileVariants}
           whileHover="hover"
         >
+          {/* The ring — larger than the photo, offset behind it. This
+              shape is the site's signature and echoes elsewhere. */}
           <motion.div
-            className="absolute inset-0 rounded-full blur-[50px]"
-            style={{ background: "#3b82f6" }}
-            initial={{ opacity: 0.25, scale: 1.1 }}
-            variants={{ hover: { opacity: 0.4, scale: 1.2 } }}
+            className="ring-motif absolute -inset-3 rounded-full"
+            initial={{ opacity: 0.5, rotate: 0 }}
+            variants={{ hover: { opacity: 0.8, scale: 1.04 } }}
             transition={springSettleFast}
           />
           <motion.div
@@ -73,18 +74,18 @@ function HeroSection() {
           </motion.div>
         </motion.div>
 
-        {/* Name with blue accent dot */}
+        {/* Name with accent dot */}
         <motion.h1
-          className="font-serif text-5xl md:text-6xl lg:text-7xl font-normal text-txt mb-4 leading-[1.02] tracking-[-0.02em]"
+          className="font-serif text-6xl md:text-7xl lg:text-8xl font-normal text-txt mb-4 leading-[0.98] tracking-[-0.025em]"
           variants={itemVariants}
         >
-          <span className="inline-block w-3 h-3 bg-accent rounded-full mr-3 mb-1" />
+          <span className="inline-block w-3 h-3 bg-accent rounded-full mr-3 mb-2" />
           Ernest Dogo
         </motion.h1>
 
         {/* Role */}
         <motion.p
-          className="text-sm font-medium text-cyan-400 uppercase tracking-[0.2em] mb-6"
+          className="text-sm font-medium text-accent uppercase tracking-[0.2em] mb-6"
           variants={itemVariants}
         >
           Fullstack Developer

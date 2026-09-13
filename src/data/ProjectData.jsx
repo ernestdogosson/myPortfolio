@@ -6,7 +6,7 @@ const ProjectsData = [
     name: "Pitchside Scores",
     githubRepo: "https://github.com/ernestdogosson/pitchside-scores",
     liveUrl: "https://pitchside-scores-backend.onrender.com",
-    techStack: ["React", "Vite", "Tailwind", "Node.js", "PostgreSQL", "Docker"],
+    techStack: ["React", "Vite", "Tailwind", "Express", "Prisma", "PostgreSQL", "Auth0", "Docker", "GitHub Actions"],
     projectDescription:
       "A scoreboard for amateur football matches, built around a crowd-reported consensus score instead of a single referee.",
 
@@ -42,7 +42,7 @@ const ProjectsData = [
     name: "Employee Scheduling App",
     githubRepo: "https://github.com/ernestdogosson/employee-scheduling-app",
     liveUrl: "",
-    techStack: ["React", "Node.js", "PostgreSQL", "Tailwind"],
+    techStack: ["React", "TypeScript", "Vite", "Tailwind", "Express", "Prisma", "PostgreSQL", "Zod", "JWT"],
     projectDescription:
       "A role-based scheduling tool: employers add staff and assign shifts, employees mark their availability.",
 

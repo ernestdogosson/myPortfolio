@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import profilePic from "../assets/profilePic.jpg";
+import { springSettle, springSettleFast, springMomentum, pressTap } from "../utils/motion.js";
 
 function HeroSection() {
   const containerVariants = {
@@ -18,10 +19,7 @@ function HeroSection() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.25, 0.1, 0.25, 1],
-      },
+      transition: springSettle,
     },
   };
 
@@ -31,19 +29,12 @@ function HeroSection() {
       opacity: 1,
       scale: 1,
       filter: "blur(0px)",
-      transition: {
-        duration: 0.8,
-        ease: [0.25, 0.1, 0.25, 1],
-      },
+      transition: springSettle,
     },
   };
 
-  const buttonHover = {
-    scale: 1.02,
-    transition: { type: "spring", stiffness: 400, damping: 25 },
-  };
-
-  const buttonTap = { scale: 0.98 };
+  const buttonHover = { scale: 1.03, transition: springMomentum };
+  const buttonTap = pressTap;
 
   return (
     <section
@@ -60,23 +51,31 @@ function HeroSection() {
         <motion.div
           className="mb-8 inline-block relative"
           variants={profileVariants}
+          whileHover="hover"
         >
-          <div
-            className="absolute inset-0 rounded-full blur-[50px] opacity-25 scale-110"
+          <motion.div
+            className="absolute inset-0 rounded-full blur-[50px]"
             style={{ background: "#3b82f6" }}
+            initial={{ opacity: 0.25, scale: 1.1 }}
+            variants={{ hover: { opacity: 0.4, scale: 1.2 } }}
+            transition={springSettleFast}
           />
-          <div className="relative w-64 h-64 rounded-full overflow-hidden border-2 border-bdr shadow-lg ring-1 ring-white/5">
+          <motion.div
+            className="relative w-64 h-64 rounded-full overflow-hidden border-2 border-bdr shadow-lg ring-1 ring-white/5"
+            variants={{ hover: { scale: 1.03 } }}
+            transition={springSettleFast}
+          >
             <img
               src={profilePic}
               alt="Ernest Dogo"
               className="w-full h-full object-cover"
             />
-          </div>
+          </motion.div>
         </motion.div>
 
         {/* Name with blue accent dot */}
         <motion.h1
-          className="font-serif text-5xl md:text-6xl lg:text-7xl font-normal text-txt mb-4 tracking-tight"
+          className="font-serif text-5xl md:text-6xl lg:text-7xl font-normal text-txt mb-4 leading-[1.02] tracking-[-0.02em]"
           variants={itemVariants}
         >
           <span className="inline-block w-3 h-3 bg-accent rounded-full mr-3 mb-1" />
@@ -96,8 +95,8 @@ function HeroSection() {
           className="text-lg text-txt-secondary leading-relaxed mb-8 max-w-lg mx-auto"
           variants={itemVariants}
         >
-          From pixel to API, I build web applications with React, JavaScript,
-          Tailwind CSS, and an eye for clean, maintainable code.
+          I build fullstack web applications end to end — React and Tailwind
+          on the frontend, Node.js, Express, and PostgreSQL underneath.
         </motion.p>
 
         {/* Location */}
@@ -116,7 +115,7 @@ function HeroSection() {
         >
           <motion.a
             href="#portfolio"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-btn-primary text-btn-primary-text rounded-xl text-sm font-medium hover:bg-btn-primary-hover transition-colors duration-150"
+            className="inline-flex items-center gap-2 px-6 py-3 btn-primary rounded-xl text-sm font-medium transition-colors duration-150"
             whileHover={buttonHover}
             whileTap={buttonTap}
           >

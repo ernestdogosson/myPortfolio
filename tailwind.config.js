@@ -1,5 +1,10 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  future: {
+    // Gate `hover:` utilities behind @media (hover: hover) so a tap on
+    // touch devices doesn't leave a hover state stuck on.
+    hoverOnlyWhenSupported: true,
+  },
   theme: {
     extend: {
       fontFamily: {

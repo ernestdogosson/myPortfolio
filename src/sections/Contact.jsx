@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { fadeUp, springSettle, springSettleFast, liftHover, pressTap } from "../utils/motion.js";
 
 /**
  * Contact section - clean, polished version
@@ -14,11 +15,6 @@ function Contact() {
     margin: "-70% 0px 0px 0px",
   });
 
-  const fadeUp = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0 },
-  };
-
   const contactLinks = [
     {
       href: "https://linkedin.com/in/ernestdogo",
@@ -26,6 +22,7 @@ function Contact() {
       iconBg: "bg-blue-500/10",
       iconHoverBg: "group-hover:bg-blue-500/20",
       iconColor: "text-blue-400",
+      borderAccent: "border-t-blue-500/50",
       title: "LinkedIn",
       subtitle: "Connect with me professionally",
     },
@@ -35,6 +32,7 @@ function Contact() {
       iconBg: "bg-zinc-500/10",
       iconHoverBg: "group-hover:bg-zinc-500/20",
       iconColor: "text-zinc-300",
+      borderAccent: "border-t-zinc-400/40",
       title: "GitHub",
       subtitle: "Check out my code",
     },
@@ -44,6 +42,7 @@ function Contact() {
       iconBg: "bg-green-500/10",
       iconHoverBg: "group-hover:bg-green-500/20",
       iconColor: "text-green-400",
+      borderAccent: "border-t-green-500/50",
       title: "Email",
       subtitle: "Send me a message",
       isEmail: true,
@@ -59,13 +58,13 @@ function Contact() {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={fadeUp}
-          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+          transition={springSettle}
         >
           <div className="inline-flex items-center gap-2 text-txt-muted text-xs uppercase tracking-[0.15em] mb-4">
             <i className="ri-mail-send-fill text-rose-400 text-base"></i>
             <span>Get In Touch</span>
           </div>
-          <h2 className="font-serif text-4xl md:text-5xl font-normal text-txt mb-4">
+          <h2 className="font-serif text-4xl md:text-5xl font-normal text-txt mb-4 leading-[1.05] tracking-[-0.015em]">
             Let's Connect
           </h2>
           <p className="text-txt-muted text-lg">
@@ -75,18 +74,19 @@ function Contact() {
 
         {/* Contact Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {contactLinks.map((link) => (
+          {contactLinks.map((link, i) => (
             <motion.a
               key={link.title}
               href={link.href}
               target={link.isEmail ? undefined : "_blank"}
               rel={link.isEmail ? undefined : "noopener noreferrer"}
-              className="glass-card rounded-2xl p-6 group"
+              className={`glass-card border-t-2 ${link.borderAccent} rounded-2xl p-6 group`}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
               variants={fadeUp}
-              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-              whileHover={{ y: -4 }}
+              transition={{ ...springSettleFast, delay: i * 0.08 }}
+              whileHover={liftHover}
+              whileTap={pressTap}
             >
               <div
                 className={`w-12 h-12 rounded-xl ${link.iconBg} flex items-center justify-center mb-4 ${link.iconHoverBg} transition-colors`}

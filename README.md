@@ -1,11 +1,11 @@
 # React Portfolio Website
 
-A portfolio website built with React to showcase web development projects. Features project gallery, search functionality, and responsive navigation.
+A single-page portfolio website built with React to showcase web development projects. Features a project gallery, search functionality, and smooth-scroll navigation.
 
 ## Tech Stack
 
 - React 19
-- React Router DOM
+- Framer Motion
 - Tailwind CSS
 - Vite
 
@@ -14,22 +14,20 @@ A portfolio website built with React to showcase web development projects. Featu
 ```
 src/
 ├── components/
-│   ├── Header.jsx
+│   ├── Navbar.jsx
 │   ├── ProjectPopup.jsx
-│   ├── ProjectSection.jsx
-│   └── Projects.jsx
-├── pages/
-│   ├── About.jsx
-│   ├── Contact.jsx
-│   ├── Home.jsx
+│   └── ProjectSection.jsx
+├── sections/
+│   ├── HeroSection.jsx
 │   ├── Portfolio.jsx
-│   └── ProjectsToggleBtn.jsx
+│   ├── About.jsx
+│   └── Contact.jsx
 ├── data/
-│   └── ProjectData.jsx
+│   ├── ProjectData.jsx
+│   └── techColors.js
 ├── assets/
 │   └── (project images)
 ├── App.jsx
-├── Navbar.jsx
 └── main.jsx
 ```
 
@@ -38,7 +36,7 @@ src/
 - Project gallery with grid layout
 - Search functionality to filter projects by tech stack
 - Modal popups for detailed project information
-- Navigation between multiple pages
+- Smooth-scroll single-page navigation
 - Component-based architecture
 
 ## How to Run
@@ -51,14 +49,14 @@ npm run dev
 ## Implementation Details
 
 - React functional components with hooks
-- Client-side routing with React Router
+- Smooth-scroll navigation between page sections
 - Utility-first styling with Tailwind CSS
 - State management for search and filtering
 - Props drilling for component communication
 
-## Live Demo
+## Deployment
 
-[View Project](https://ernestdogosson.github.io/myPortfolio/)
+Hosted on Netlify, built automatically from `main` via `netlify.toml` (`npm run build` → `dist`).
 
 ---
 

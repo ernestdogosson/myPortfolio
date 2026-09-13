@@ -1,10 +1,79 @@
-import wordTyping from "../assets/wordTyping.png";
-import movieLibrary from "../assets/movieLibrary.png";
-import pokemon from "../assets/pokemon.png";
-import tatoo from "../assets/tatoo.png";
-import travelAgency from "../assets/travleAgency.png";
+import pokemon from "../assets/pokemon.jpg";
+import travelAgency from "../assets/travleAgency.jpg";
 
 const ProjectsData = [
+  {
+    name: "Pitchside Scores",
+    githubRepo: "https://github.com/ernestdogosson/pitchside-scores",
+    liveUrl: "https://pitchside-scores-backend.onrender.com",
+    techStack: ["React", "Vite", "Tailwind", "Node.js", "PostgreSQL", "Docker"],
+    projectDescription:
+      "A scoreboard for amateur football matches where the crowd, not one referee, decides the final score.",
+
+    projectInfo:
+      "Anyone can browse fixtures and results. Logged-in users add fixtures and report scorelines, and the app derives a consensus score from everyone's reports rather than trusting a single submission.",
+
+    skillsLearned:
+      "Fullstack architecture with Express and Prisma, PostgreSQL data modeling, Auth0 session-based authentication, multi-stage Docker builds, and CI/CD with GitHub Actions.",
+
+    challenges:
+      "A split Vercel-frontend/Render-backend deploy broke on session cookies (Chrome blocks third-party cookies by default), so the app was collapsed into a single-origin Render deployment to eliminate the cross-origin surface entirely.",
+
+    bgImage: null,
+
+    details: {
+      longDescription:
+        "A solo-built fullstack app for reporting and settling amateur football scorelines. The core of the project is a consensus algorithm that tallies reported scores and only returns a result when reports agree, or returns null below a configurable threshold rather than guessing a winner. Ships with a real CI pipeline: a Postgres service container, Prisma migrations, a full test run, and a separate clean Docker build check on every push.",
+
+      features: [
+        "Consensus algorithm — resolves crowd-reported scorelines, refuses to guess on a tie",
+        "Auth0 session-cookie authentication, HttpOnly, no tokens exposed to client JS",
+        "Multi-stage Dockerfile — frontend build stage, single backend runtime serving the built bundle",
+        "CI pipeline with a live Postgres service container, migration deploy, and 27 tests",
+        "Persistent Postgres storage chosen specifically to survive Render's free-tier container sleep/wake cycle",
+      ],
+
+      designNotes:
+        "Deliberately moved from a split frontend/backend deployment to a single Render service after third-party cookie blocking broke session auth across origins — same-origin turned out stricter than a locked-down CORS policy would have been, which was a real architectural tradeoff, not just a workaround.",
+    },
+  },
+
+  {
+    name: "Employee Scheduling App",
+    githubRepo: "https://github.com/ernestdogosson/employee-scheduling-app",
+    liveUrl: "",
+    techStack: ["React", "Node.js", "PostgreSQL", "Tailwind"],
+    projectDescription:
+      "A role-based scheduling tool: employers add staff and assign shifts, employees mark their availability.",
+
+    projectInfo:
+      "Employers manage a weekly shift grid and see who's available before assigning. Employees log in to mark availability and view their assigned shifts. Two distinct roles, two distinct sets of permissions.",
+
+    skillsLearned:
+      "TypeScript across a fullstack app, Express 5 middleware chains, Prisma relational modeling with cascade deletes, role-based access control, and JWT authentication.",
+
+    challenges:
+      "Designing a relational schema that prevents double-booking — composite uniqueness constraints on employee, date, and shift enforce that at the database level rather than trusting application logic alone.",
+
+    bgImage: null,
+
+    details: {
+      longDescription:
+        "A fullstack scheduling app built with React, TypeScript, and Express, distinguishing EMPLOYER and EMPLOYEE roles at every layer. Five middleware layers handle auth, role enforcement, request validation, error handling, and logging, keeping route handlers focused purely on business logic. The schema evolved across three real migrations as the auth model changed — starting with passwords, then moving to a lighter-weight login code once traditional password security stopped being the right fit for the use case.",
+
+      features: [
+        "Role-based access — EMPLOYER and EMPLOYEE, enforced by a requireRole middleware",
+        "Five middleware layers: auth, role check, Zod validation, error handling, request logging",
+        "Route-per-resource backend covering auth, employees, availability, schedules, and shifts",
+        "Composite uniqueness constraints prevent double-booking at the database level",
+        "One central error-handling middleware maps Zod and Prisma errors to the correct HTTP status",
+      ],
+
+      designNotes:
+        "Chose email + 4-digit login code over a traditional password for this use case, and was explicit that it isn't presented as password-grade security — it's an access code with a bounded keyspace, sized to the actual risk of an internal scheduling tool.",
+    },
+  },
+
   {
     name: "Pokémon Guessing Game",
     githubRepo: "https://github.com/ernestdogosson/group-project-game",
@@ -38,111 +107,6 @@ const ProjectsData = [
 
       designNotes:
         "Built collaboratively with a focus on component reusability and separation of concerns. Gained hands-on experience with team-based Git workflows and code review.",
-    },
-  },
-
-  {
-    name: "Ink & Soul Tattoo Studio",
-    githubRepo:
-      "https://github.com/ernestdogosson/TattooStudioWebsite--Ink-Soul",
-    liveUrl: "https://ernestdogosson.github.io/TattooStudioWebsite--Ink-Soul",
-    techStack: ["HTML", "CSS", "SVG"],
-    projectDescription:
-      "A dark-themed multi-page business website for a fictional tattoo studio.",
-
-    projectInfo:
-      "Four-page site with Home, About, Gallery, and Contact sections. Features custom SVG logo design and responsive layouts.",
-
-    skillsLearned:
-      "Multi-page navigation, custom SVG graphics with gradients, CSS Grid and Flexbox, responsive design, and collaborative Git workflows.",
-
-    challenges:
-      "Creating a cohesive dark aesthetic, designing custom SVG logos, and coordinating page styles across team members.",
-
-    bgImage: tatoo,
-
-    details: {
-      longDescription:
-        "A professional multi-page website built for a fictional tattoo studio as a group project. The site features a dark, moody aesthetic with custom SVG logo design, responsive layouts using CSS Grid and Flexbox, and professional typography with three complementary fonts. Built with pure HTML and CSS to demonstrate strong fundamentals.",
-
-      features: [
-        "Custom SVG logo with gradient effects",
-        "Dark theme aesthetic suited to the tattoo industry",
-        "Responsive design across mobile, tablet, and desktop",
-        "Professional typography with Kaushan Script, New Rocker, and Roboto",
-        "Contact form and social media integration",
-      ],
-
-      designNotes:
-        "Focused on creating a visually cohesive brand identity through custom SVG work, dark color palettes, and carefully chosen typography. Practiced collaborative development with structured CSS organization.",
-    },
-  },
-
-  {
-    name: "Word Typing Game",
-    githubRepo: "https://github.com/ernestdogosson/js-07",
-    liveUrl: "https://kboardblitz.netlify.app/",
-    techStack: ["HTML", "CSS", "JavaScript"],
-    projectDescription: "Fast-paced typing game with timer challenges.",
-
-    projectInfo:
-      "Type randomly generated words before time runs out. Correct answers add bonus time and increase score.",
-
-    skillsLearned:
-      "DOM manipulation, event handling, timers, random generation, and game loop logic.",
-
-    challenges:
-      "Timer resets, score tracking, input detection, and UI state synchronization.",
-
-    bgImage: wordTyping,
-
-    details: {
-      longDescription:
-        "A fast-paced browser typing game where players race against a countdown timer. Each correct word adds time and increases the score. This project helped me understand logic flow, state handling, and DOM-driven UI updates.",
-
-      features: [
-        "Random word generation",
-        "Live scoring system",
-        "Countdown timer logic",
-        "Difficulty adjustments",
-      ],
-
-      designNotes:
-        "Focused on fast feedback through UI updates and clean input experience for the user. Learned how to sync game logic with visual state changes.",
-    },
-  },
-
-  {
-    name: "Movie Library App",
-    githubRepo: "https://github.com/ernestdogosson/js-06",
-    liveUrl: "https://ernestdogosson.github.io/movieLibraryApp/",
-    techStack: ["JavaScript", "HTML", "CSS"],
-    projectDescription: "Track and organize your movie collection.",
-
-    projectInfo:
-      "Browse, add, delete movies, and mark them as watched or unwatched with dynamic UI updates.",
-
-    skillsLearned:
-      "Dynamic lists with JavaScript, user interactions, and DOM updates without frameworks.",
-
-    challenges:
-      "Dynamic rendering, state management with arrays/objects, and watch status toggling.",
-
-    bgImage: movieLibrary,
-
-    details: {
-      longDescription:
-        "A fully interactive movie collection app built with vanilla JavaScript. It supports adding movies, toggling watched status, and deleting entries. Every interaction immediately updates the UI, making it a small but effective practice in state-driven interfaces.",
-
-      features: [
-        "Add/remove movies to a dynamic list",
-        "Watched/unwatched toggle",
-        "Local in-memory state management",
-        "Clean and minimal UI with real-time updates",
-      ],
-
-      designNotes:
-        "The biggest focus was clarity and user feedback. Learned to manage multiple layers of UI state without relying on frameworks.",
     },
   },
 

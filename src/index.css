@@ -27,6 +27,7 @@
   --border-primary: rgba(255, 255, 255, 0.08);
   --border-light: rgba(255, 255, 255, 0.05);
   --border-strong: rgba(255, 255, 255, 0.14);
+  --border-catchlight: rgba(255, 255, 255, 0.16);
 
   /* Button tokens */
   --btn-primary-bg: #3b82f6;
@@ -60,14 +61,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Subtle grid background */
+/* Faint grid texture — neutral base. Color/identity now lives per-section,
+   not as one wash bleeding uniformly through the whole page. */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
   background-size: 80px 80px;
   pointer-events: none;
   z-index: 0;
@@ -78,18 +80,52 @@ body::before {
   color: var(--text-primary);
 }
 
-/* Glass card utility */
+/* Glass card utility — default weight, for chips and secondary surfaces */
 @layer components {
   .glass-card {
     background-color: var(--bg-surface);
     backdrop-filter: blur(16px) saturate(1.2);
     -webkit-backdrop-filter: blur(16px) saturate(1.2);
     border: 1px solid var(--border-primary);
-    transition: background-color 150ms, border-color 150ms;
+    border-top-color: var(--border-catchlight);
+    transition: background-color 150ms ease, border-color 150ms ease;
   }
+
+  /* Heavier material for the primary/flagship surface on a page —
+     stronger blur + deeper shadow so it reads as thicker than a chip. */
+  .glass-card-heavy {
+    background-color: var(--bg-elevated);
+    backdrop-filter: blur(28px) saturate(1.4);
+    -webkit-backdrop-filter: blur(28px) saturate(1.4);
+    border: 1px solid var(--border-strong);
+    border-top-color: var(--border-catchlight);
+    box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.55);
+  }
+
+  .btn-primary {
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    transition: background-color 150ms ease, transform 150ms ease;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
   .glass-card:hover {
     background-color: var(--bg-elevated);
     border-color: var(--border-strong);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--btn-primary-hover);
+  }
+}
+
+/* Reduced motion: keep color/opacity feedback, drop movement */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
   }
 }
 

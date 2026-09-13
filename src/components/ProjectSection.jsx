@@ -3,6 +3,7 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import ProjectsData from "../data/ProjectData.jsx";
 import ProjectPopup from "./ProjectPopup.jsx";
 import { techColors, defaultTech } from "../data/techColors.js";
+import { fadeUp, springSettle, springSettleFast, springMomentum, pressTap } from "../utils/motion.js";
 
 const accents = [
   { color: "text-green-500", icon: "ri-code-box-fill" },
@@ -48,11 +49,6 @@ function ProjectSection() {
     setActiveIndex(index);
   };
 
-  const fadeUp = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0 },
-  };
-
   // Side-to-side slide animation for carousel
   const slideVariants = {
     enter: (dir) => ({ x: dir > 0 ? 300 : -300, opacity: 0 }),
@@ -74,13 +70,13 @@ function ProjectSection() {
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         variants={fadeUp}
-        transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+        transition={springSettle}
       >
         <div className="inline-flex items-center gap-2 text-txt-muted text-xs uppercase tracking-[0.15em] mb-4">
           <i className="ri-folder-3-fill text-amber-400 text-base"></i>
           <span>Selected Work</span>
         </div>
-        <h2 className="font-serif text-4xl md:text-5xl font-normal text-txt mb-4">
+        <h2 className="font-serif text-4xl md:text-5xl font-normal text-txt mb-4 leading-[1.05] tracking-[-0.015em]">
           Projects
         </h2>
         <p className="text-txt-muted max-w-lg text-lg mx-auto">
@@ -95,9 +91,9 @@ function ProjectSection() {
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         variants={fadeUp}
-        transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+        transition={{ ...springSettle, delay: 0.2 }}
       >
-        <div className="glass-card rounded-3xl overflow-hidden shadow-sm">
+        <div className="glass-card-heavy rounded-3xl overflow-hidden">
           {/* Browser Chrome */}
           <div className="flex items-center justify-between px-4 py-3 bg-elevated border-b border-bdr">
             <div className="flex items-center gap-2">
@@ -114,9 +110,11 @@ function ProjectSection() {
             {/* View Toggle */}
             {project.liveUrl && (
               <div className="flex items-center gap-1 bg-alt rounded-lg p-1">
-                <button
+                <motion.button
                   onClick={() => setShowLive(false)}
-                  className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
+                  whileTap={pressTap}
+                  transition={springSettleFast}
+                  className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
                     !showLive
                       ? "bg-surface text-txt shadow-sm"
                       : "text-txt-muted hover:text-txt-secondary"
@@ -124,10 +122,12 @@ function ProjectSection() {
                 >
                   <i className="ri-image-line mr-1"></i>
                   Preview
-                </button>
-                <button
+                </motion.button>
+                <motion.button
                   onClick={() => setShowLive(true)}
-                  className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
+                  whileTap={pressTap}
+                  transition={springSettleFast}
+                  className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
                     showLive
                       ? "bg-surface text-txt shadow-sm"
                       : "text-txt-muted hover:text-txt-secondary"
@@ -135,7 +135,7 @@ function ProjectSection() {
                 >
                   <i className="ri-play-circle-line mr-1"></i>
                   Live
-                </button>
+                </motion.button>
               </div>
             )}
           </div>
@@ -163,7 +163,7 @@ function ProjectSection() {
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+                  transition={springSettleFast}
                   className="absolute inset-0"
                 >
                   {project.bgImage ? (
@@ -193,7 +193,7 @@ function ProjectSection() {
                 initial="enter"
                 animate="center"
                 exit="exit"
-                transition={{ duration: 0.3 }}
+                transition={springSettleFast}
               >
                 {/* Title + Description */}
                 <div className="mb-4">
@@ -225,23 +225,29 @@ function ProjectSection() {
 
                   {/* Action Buttons */}
                   <div className="flex items-center gap-2">
-                    <button
+                    <motion.button
                       onClick={() => setIsModalOpen(true)}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-btn-primary text-btn-primary-text rounded-lg text-sm font-medium hover:bg-btn-primary-hover transition-colors duration-150"
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={pressTap}
+                      transition={springMomentum}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 btn-primary rounded-lg text-sm font-medium transition-colors duration-150"
                     >
                       <i className="ri-article-line text-xs"></i>
                       Details
-                    </button>
+                    </motion.button>
                     {project.githubRepo && (
-                      <a
+                      <motion.a
                         href={project.githubRepo}
                         target="_blank"
                         rel="noopener noreferrer"
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={pressTap}
+                        transition={springMomentum}
                         className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-surface border border-bdr text-txt-secondary rounded-lg text-sm font-medium hover:bg-elevated hover:border-bdr-strong transition-colors duration-150"
                       >
                         <i className="ri-github-fill text-xs"></i>
                         Code
-                      </a>
+                      </motion.a>
                     )}
                   </div>
                 </div>
@@ -251,30 +257,39 @@ function ProjectSection() {
         </div>
 
         {/* Navigation Arrows */}
-        <button
+        <motion.button
           onClick={goPrev}
           aria-label="Previous project"
-          className="absolute -left-4 md:-left-5 top-[250px] md:top-[300px] w-10 h-10 md:w-12 md:h-12 rounded-full glass-card shadow-lg flex items-center justify-center text-txt-secondary hover:scale-110 transition-transform duration-150 z-10"
+          whileHover={{ scale: 1.1 }}
+          whileTap={pressTap}
+          transition={springMomentum}
+          className="absolute -left-4 md:-left-5 top-[250px] md:top-[300px] w-10 h-10 md:w-12 md:h-12 rounded-full glass-card shadow-lg flex items-center justify-center text-txt-secondary z-10"
         >
           <i className="ri-arrow-left-s-line text-xl"></i>
-        </button>
-        <button
+        </motion.button>
+        <motion.button
           onClick={goNext}
           aria-label="Next project"
-          className="absolute -right-4 md:-right-5 top-[250px] md:top-[300px] w-10 h-10 md:w-12 md:h-12 rounded-full glass-card shadow-lg flex items-center justify-center text-txt-secondary hover:scale-110 transition-transform duration-150 z-10"
+          whileHover={{ scale: 1.1 }}
+          whileTap={pressTap}
+          transition={springMomentum}
+          className="absolute -right-4 md:-right-5 top-[250px] md:top-[300px] w-10 h-10 md:w-12 md:h-12 rounded-full glass-card shadow-lg flex items-center justify-center text-txt-secondary z-10"
         >
           <i className="ri-arrow-right-s-line text-xl"></i>
-        </button>
+        </motion.button>
       </motion.div>
 
       {/* Thumbnail Navigation */}
       <div className="flex items-center justify-center gap-4 mt-8">
         {ProjectsData.map((proj, index) => (
-          <button
+          <motion.button
             key={index}
             onClick={() => goTo(index)}
+            whileHover={{ scale: 1.05 }}
+            whileTap={pressTap}
+            transition={springMomentum}
             style={{ width: "112px", height: "63px" }}
-            className={`relative rounded-xl overflow-hidden border-2 transition-all duration-150 bg-elevated ${
+            className={`relative rounded-xl overflow-hidden border-2 transition-colors duration-150 bg-elevated ${
               index === activeIndex
                 ? "border-stone-400 shadow-lg"
                 : "border-bdr opacity-50 hover:opacity-100 hover:border-bdr-strong"
@@ -293,7 +308,7 @@ function ProjectSection() {
                 ></i>
               </div>
             )}
-          </button>
+          </motion.button>
         ))}
       </div>
 

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { techColors, defaultTech } from "../data/techColors.js";
+import { easeOut } from "../utils/motion.js";
 
 /**
  * ProjectPopup with enhanced framer-motion animations
@@ -33,9 +34,9 @@ function ProjectPopup({ project, onClose, accent }) {
 
   // Animation variants
   const backdropVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 },
-    exit: { opacity: 0 },
+    hidden: { opacity: 0, backdropFilter: "blur(0px)" },
+    visible: { opacity: 1, backdropFilter: "blur(8px)" },
+    exit: { opacity: 0, backdropFilter: "blur(0px)" },
   };
 
   const modalVariants = {
@@ -65,7 +66,7 @@ function ProjectPopup({ project, onClose, accent }) {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] },
+      transition: { duration: 0.4, ease: easeOut },
     },
   };
 
@@ -74,7 +75,7 @@ function ProjectPopup({ project, onClose, accent }) {
     visible: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] },
+      transition: { duration: 0.5, ease: easeOut },
     },
   };
 
@@ -83,13 +84,13 @@ function ProjectPopup({ project, onClose, accent }) {
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 0.3 },
+      transition: { duration: 0.25, ease: easeOut },
     },
   };
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-backdrop backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-backdrop"
       variants={backdropVariants}
       initial="hidden"
       animate="visible"
@@ -118,15 +119,15 @@ function ProjectPopup({ project, onClose, accent }) {
                 className="w-full h-full object-cover object-top"
                 initial={{ scale: 1.1 }}
                 animate={{ scale: 1 }}
-                transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+                transition={{ duration: 0.6, ease: easeOut }}
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-stone-800 to-stone-900">
                 <motion.i
                   className={`${accent?.icon || 'ri-code-box-fill'} text-8xl text-stone-600`}
-                  initial={{ scale: 0, rotate: -10 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
+                  initial={{ scale: 0.5, opacity: 0, rotate: -10 }}
+                  animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                  transition={{ delay: 0.3, type: "spring", stiffness: 200, damping: 15 }}
                 />
               </div>
             )}
@@ -210,13 +211,13 @@ function ProjectPopup({ project, onClose, accent }) {
                       variants={featureVariants}
                       initial="hidden"
                       animate="visible"
-                      transition={{ delay: 0.4 + i * 0.1 }}
+                      transition={{ delay: 0.3 + i * 0.06, ease: easeOut, duration: 0.25 }}
                     >
                       <motion.i
                         className="ri-checkbox-circle-fill text-green-500 mt-0.5 text-xs"
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ delay: 0.5 + i * 0.1, type: "spring", stiffness: 400 }}
+                        initial={{ scale: 0.5, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ delay: 0.36 + i * 0.06, type: "spring", stiffness: 400, damping: 20 }}
                       />
                       <span>{feature}</span>
                     </motion.li>
@@ -248,7 +249,7 @@ function ProjectPopup({ project, onClose, accent }) {
                   href={project.githubRepo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-btn-primary text-btn-primary-text rounded-lg text-sm font-medium hover:bg-btn-primary-hover transition-colors duration-150"
+                  className="inline-flex items-center gap-2 px-4 py-2 btn-primary rounded-lg text-sm font-medium transition-colors duration-150"
                   whileHover={{ scale: 1.03, y: -1 }}
                   whileTap={{ scale: 0.97 }}
                 >

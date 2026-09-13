@@ -73,7 +73,7 @@ function HeroSection() {
             className="text-lg text-txt-secondary leading-relaxed mb-6 max-w-md md:max-w-none mx-auto md:mx-0"
             variants={itemVariants}
           >
-            I build fullstack web applications end to end — React and Tailwind
+            I build fullstack web applications end to end: React and Tailwind
             on the frontend, Node.js, Express, and PostgreSQL underneath.
           </motion.p>
 

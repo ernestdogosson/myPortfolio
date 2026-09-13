@@ -8,7 +8,7 @@ const ProjectsData = [
     liveUrl: "https://pitchside-scores-backend.onrender.com",
     techStack: ["React", "Vite", "Tailwind", "Node.js", "PostgreSQL", "Docker"],
     projectDescription:
-      "A scoreboard for amateur football matches where the crowd, not one referee, decides the final score.",
+      "A scoreboard for amateur football matches, built around a crowd-reported consensus score instead of a single referee.",
 
     projectInfo:
       "Anyone can browse fixtures and results. Logged-in users add fixtures and report scorelines, and the app derives a consensus score from everyone's reports rather than trusting a single submission.",
@@ -26,15 +26,15 @@ const ProjectsData = [
         "A solo-built fullstack app for reporting and settling amateur football scorelines. The core of the project is a consensus algorithm that tallies reported scores and only returns a result when reports agree, or returns null below a configurable threshold rather than guessing a winner. Ships with a real CI pipeline: a Postgres service container, Prisma migrations, a full test run, and a separate clean Docker build check on every push.",
 
       features: [
-        "Consensus algorithm — resolves crowd-reported scorelines, refuses to guess on a tie",
+        "Consensus algorithm that resolves crowd-reported scorelines and returns no result on a tie",
         "Auth0 session-cookie authentication, HttpOnly, no tokens exposed to client JS",
-        "Multi-stage Dockerfile — frontend build stage, single backend runtime serving the built bundle",
+        "Multi-stage Dockerfile: a frontend build stage, then a single backend runtime that serves the built bundle",
         "CI pipeline with a live Postgres service container, migration deploy, and 27 tests",
-        "Persistent Postgres storage chosen specifically to survive Render's free-tier container sleep/wake cycle",
+        "Persistent Postgres storage, needed so Render's free-tier container sleep/wake cycle doesn't lose data",
       ],
 
       designNotes:
-        "Deliberately moved from a split frontend/backend deployment to a single Render service after third-party cookie blocking broke session auth across origins — same-origin turned out stricter than a locked-down CORS policy would have been, which was a real architectural tradeoff, not just a workaround.",
+        "Moved from a split frontend/backend deployment to a single Render service after third-party cookie blocking broke session auth across origins. Same-origin ended up stricter than a locked-down CORS policy would have been, a real architectural tradeoff worth flagging on a team.",
     },
   },
 
@@ -53,16 +53,16 @@ const ProjectsData = [
       "TypeScript across a fullstack app, Express 5 middleware chains, Prisma relational modeling with cascade deletes, role-based access control, and JWT authentication.",
 
     challenges:
-      "Designing a relational schema that prevents double-booking — composite uniqueness constraints on employee, date, and shift enforce that at the database level rather than trusting application logic alone.",
+      "Designing a relational schema that prevents double-booking: composite uniqueness constraints on employee, date, and shift enforce that at the database level rather than trusting application logic alone.",
 
     bgImage: null,
 
     details: {
       longDescription:
-        "A fullstack scheduling app built with React, TypeScript, and Express, distinguishing EMPLOYER and EMPLOYEE roles at every layer. Five middleware layers handle auth, role enforcement, request validation, error handling, and logging, keeping route handlers focused purely on business logic. The schema evolved across three real migrations as the auth model changed — starting with passwords, then moving to a lighter-weight login code once traditional password security stopped being the right fit for the use case.",
+        "A fullstack scheduling app built with React, TypeScript, and Express, with EMPLOYER and EMPLOYEE roles kept separate at every layer. Five middleware layers handle auth, role enforcement, request validation, error handling, and logging, so route handlers only deal with business logic. The schema went through three real migrations as the auth model changed, starting with passwords, then moving to a lighter login code once a traditional password stopped being the right fit for the use case.",
 
       features: [
-        "Role-based access — EMPLOYER and EMPLOYEE, enforced by a requireRole middleware",
+        "Role-based access for EMPLOYER and EMPLOYEE, enforced by a requireRole middleware",
         "Five middleware layers: auth, role check, Zod validation, error handling, request logging",
         "Route-per-resource backend covering auth, employees, availability, schedules, and shifts",
         "Composite uniqueness constraints prevent double-booking at the database level",
@@ -70,7 +70,7 @@ const ProjectsData = [
       ],
 
       designNotes:
-        "Chose email + 4-digit login code over a traditional password for this use case, and was explicit that it isn't presented as password-grade security — it's an access code with a bounded keyspace, sized to the actual risk of an internal scheduling tool.",
+        "Chose an email plus 4-digit login code over a traditional password for this use case. It's an access code with a bounded keyspace, sized to the actual risk of an internal scheduling tool, not password-grade security.",
     },
   },
 

@@ -52,7 +52,7 @@ function About() {
           </h2>
           <div className="space-y-4 text-txt-secondary leading-relaxed mb-10">
             <p>
-              I came to web development through an unusual path — a Geography
+              I came to web development through an unusual path: a Geography
               degree, a Master's in Geomatics, and years of working with
               spatial data and mapping systems. That background shaped how I
               think about structuring information and building interfaces.

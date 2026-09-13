@@ -1,12 +1,13 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { fadeUp, springSettle } from "../utils/motion.js";
+import { fadeUp, springSettle, useCanHover } from "../utils/motion.js";
 
 /**
  * About — asymmetric two-column layout. Left: heading and bio.
  * Right: a simple icon list (education, background).
  */
 function About() {
+  const canHover = useCanHover();
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, {
     once: true,
@@ -122,7 +123,7 @@ function About() {
             <motion.div
               key={skill.label}
               className="skill-tile rounded-xl p-4 flex flex-col items-center gap-2"
-              whileHover={{ y: -3 }}
+              whileHover={canHover ? { y: -3 } : undefined}
               transition={springSettle}
             >
               <i className={`${skill.icon} ${skill.color} text-2xl`}></i>

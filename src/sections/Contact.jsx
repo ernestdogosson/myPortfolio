@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { fadeUp, springSettle, springSettleFast, liftHover, pressTap } from "../utils/motion.js";
+import { fadeUp, springSettle, springSettleFast, liftHover, pressTap, useCanHover } from "../utils/motion.js";
 
 /**
  * Contact section - clean, polished version
@@ -9,6 +9,7 @@ import { fadeUp, springSettle, springSettleFast, liftHover, pressTap } from "../
  * - Simple CSS hover effects
  */
 function Contact() {
+  const canHover = useCanHover();
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, {
     once: true,
@@ -85,7 +86,7 @@ function Contact() {
               animate={isInView ? "visible" : "hidden"}
               variants={fadeUp}
               transition={{ ...springSettleFast, delay: i * 0.08 }}
-              whileHover={liftHover}
+              whileHover={canHover ? liftHover : undefined}
               whileTap={pressTap}
             >
               <div

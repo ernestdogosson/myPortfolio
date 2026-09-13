@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { techColors, defaultTech } from "../data/techColors.js";
-import { easeOut } from "../utils/motion.js";
+import { easeOut, useCanHover } from "../utils/motion.js";
 
 /**
  * ProjectPopup with enhanced framer-motion animations
@@ -17,6 +17,8 @@ import { easeOut } from "../utils/motion.js";
  * - Action buttons: Scale on hover
  */
 function ProjectPopup({ project, onClose, accent }) {
+  const canHover = useCanHover();
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -34,9 +36,9 @@ function ProjectPopup({ project, onClose, accent }) {
 
   // Animation variants
   const backdropVariants = {
-    hidden: { opacity: 0, backdropFilter: "blur(0px)" },
-    visible: { opacity: 1, backdropFilter: "blur(8px)" },
-    exit: { opacity: 0, backdropFilter: "blur(0px)" },
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+    exit: { opacity: 0 },
   };
 
   const modalVariants = {
@@ -57,7 +59,7 @@ function ProjectPopup({ project, onClose, accent }) {
       opacity: 0,
       scale: 0.95,
       y: 20,
-      transition: { duration: 0.2 },
+      transition: { duration: 0.2, ease: easeOut },
     },
   };
 
@@ -90,7 +92,7 @@ function ProjectPopup({ project, onClose, accent }) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-backdrop"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-backdrop backdrop-blur"
       variants={backdropVariants}
       initial="hidden"
       animate="visible"
@@ -125,7 +127,7 @@ function ProjectPopup({ project, onClose, accent }) {
               <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-stone-800 to-stone-900">
                 <motion.i
                   className={`${accent?.icon || 'ri-code-box-fill'} text-8xl text-stone-600`}
-                  initial={{ scale: 0.5, opacity: 0, rotate: -10 }}
+                  initial={{ scale: 0.92, opacity: 0, rotate: -10 }}
                   animate={{ scale: 1, opacity: 1, rotate: 0 }}
                   transition={{ delay: 0.3, type: "spring", stiffness: 200, damping: 15 }}
                 />
@@ -139,7 +141,7 @@ function ProjectPopup({ project, onClose, accent }) {
             <motion.button
               className="absolute top-4 right-4 w-9 h-9 rounded-full bg-elevated text-txt-muted hover:bg-alt hover:text-txt-secondary transition-colors flex items-center justify-center"
               onClick={onClose}
-              whileHover={{ rotate: 90, scale: 1.1 }}
+              whileHover={canHover ? { rotate: 90, scale: 1.1 } : undefined}
               whileTap={{ scale: 0.9 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
@@ -172,10 +174,10 @@ function ProjectPopup({ project, onClose, accent }) {
                     <motion.span
                       key={i}
                       className={`inline-flex items-center gap-1 px-2.5 py-1 ${colors.bg} ${colors.text} rounded-lg text-xs font-medium`}
-                      initial={{ opacity: 0, scale: 0.5 }}
+                      initial={{ opacity: 0, scale: 0.92 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.3 + i * 0.05, duration: 0.3 }}
-                      whileHover={{ scale: 1.05 }}
+                      transition={{ delay: 0.3 + i * 0.05, duration: 0.3, ease: easeOut }}
+                      whileHover={canHover ? { scale: 1.05 } : undefined}
                     >
                       <i className={`${colors.icon} text-xs`}></i>
                       {tech}
@@ -215,7 +217,7 @@ function ProjectPopup({ project, onClose, accent }) {
                     >
                       <motion.i
                         className="ri-checkbox-circle-fill text-green-500 mt-0.5 text-xs"
-                        initial={{ scale: 0.5, opacity: 0 }}
+                        initial={{ scale: 0.92, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ delay: 0.36 + i * 0.06, type: "spring", stiffness: 400, damping: 20 }}
                       />
@@ -250,7 +252,7 @@ function ProjectPopup({ project, onClose, accent }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-2 btn-primary rounded-lg text-sm font-medium transition-colors duration-150"
-                  whileHover={{ scale: 1.03, y: -1 }}
+                  whileHover={canHover ? { scale: 1.03, y: -1 } : undefined}
                   whileTap={{ scale: 0.97 }}
                 >
                   <i className="ri-github-fill"></i>
@@ -263,7 +265,7 @@ function ProjectPopup({ project, onClose, accent }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-surface border border-bdr text-txt-secondary rounded-lg text-sm font-medium hover:bg-elevated hover:border-bdr-strong transition-colors duration-150"
-                  whileHover={{ scale: 1.03, y: -1 }}
+                  whileHover={canHover ? { scale: 1.03, y: -1 } : undefined}
                   whileTap={{ scale: 0.97 }}
                 >
                   <i className="ri-external-link-line"></i>

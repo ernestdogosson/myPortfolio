@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import profilePic from "../assets/profilePic.jpg";
-import { springSettle, springSettleFast, springMomentum, pressTap } from "../utils/motion.js";
+import { springSettle, springSettleFast, pressTap, useCanHover } from "../utils/motion.js";
 
 function HeroSection() {
+  const canHover = useCanHover();
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -33,7 +35,7 @@ function HeroSection() {
     },
   };
 
-  const buttonHover = { scale: 1.03, transition: springMomentum };
+  const buttonHover = { scale: 1.03, transition: springSettleFast };
   const buttonTap = pressTap;
 
   return (
@@ -94,7 +96,7 @@ function HeroSection() {
             <motion.a
               href="#portfolio"
               className="inline-flex items-center gap-2 px-6 py-3 btn-primary rounded-xl text-sm font-medium transition-colors duration-150"
-              whileHover={buttonHover}
+              whileHover={canHover ? buttonHover : undefined}
               whileTap={buttonTap}
             >
               <i className="ri-folder-3-line"></i>
@@ -103,7 +105,7 @@ function HeroSection() {
             <motion.a
               href="#contact"
               className="glass-card inline-flex items-center gap-2 px-6 py-3 text-txt-secondary rounded-xl text-sm font-medium"
-              whileHover={buttonHover}
+              whileHover={canHover ? buttonHover : undefined}
               whileTap={buttonTap}
             >
               <i className="ri-mail-line"></i>
@@ -118,7 +120,7 @@ function HeroSection() {
           variants={profileVariants}
           initial="hidden"
           animate="visible"
-          whileHover="hover"
+          whileHover={canHover ? "hover" : undefined}
         >
           <div className="relative">
             {/* The ring — larger than the photo, offset behind it. This

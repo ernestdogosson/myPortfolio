@@ -3,7 +3,7 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import ProjectsData from "../data/ProjectData.jsx";
 import ProjectPopup from "./ProjectPopup.jsx";
 import { techColors, defaultTech } from "../data/techColors.js";
-import { fadeUp, springSettle, liftHover, pressTap } from "../utils/motion.js";
+import { fadeUp, springSettle, liftHover, pressTap, useCanHover } from "../utils/motion.js";
 
 const accents = [
   { color: "text-accent", icon: "ri-rocket-fill" },
@@ -19,6 +19,7 @@ const accents = [
  */
 function ProjectSection() {
   const [activeIndex, setActiveIndex] = useState(null);
+  const canHover = useCanHover();
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-70% 0px 0px 0px" });
 
@@ -68,7 +69,7 @@ function ProjectSection() {
               animate={isInView ? "visible" : "hidden"}
               variants={fadeUp}
               transition={{ ...springSettle, delay: 0.1 + index * 0.08 }}
-              whileHover={liftHover}
+              whileHover={canHover ? liftHover : undefined}
               whileTap={pressTap}
             >
               {/* Background image or fallback */}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll } from "framer-motion";
-import { springSettleFast, pressTap } from "../utils/motion.js";
+import { springSettleFast, pressTap, useCanHover } from "../utils/motion.js";
 
 /**
  * Navbar — full-width bar, logo left / links right. Materializes into
@@ -11,6 +11,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const { scrollYProgress } = useScroll();
+  const canHover = useCanHover();
 
   const navLinks = [
     { id: "portfolio", label: "Work" },
@@ -48,6 +49,17 @@ export default function Navbar() {
     const element = document.getElementById(id);
     if (!element) return;
     const targetY = element.getBoundingClientRect().top + window.scrollY - 80;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (prefersReducedMotion) {
+      window.scrollTo(0, targetY);
+      setIsMobileMenuOpen(false);
+      return;
+    }
+
     const startY = window.scrollY;
     const diff = targetY - startY;
     const duration = 1000;
@@ -87,7 +99,7 @@ export default function Navbar() {
           <motion.button
             onClick={() => scrollToSection("home")}
             className="font-serif text-xl text-txt hover:text-txt-secondary transition-colors duration-150"
-            whileHover={{ scale: 1.05 }}
+            whileHover={canHover ? { scale: 1.05 } : undefined}
             whileTap={pressTap}
             transition={springSettleFast}
           >

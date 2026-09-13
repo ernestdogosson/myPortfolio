@@ -3,333 +3,135 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import ProjectsData from "../data/ProjectData.jsx";
 import ProjectPopup from "./ProjectPopup.jsx";
 import { techColors, defaultTech } from "../data/techColors.js";
-import { fadeUp, springSettle, springSettleFast, springMomentum, pressTap } from "../utils/motion.js";
+import { fadeUp, springSettle, liftHover, pressTap } from "../utils/motion.js";
 
 const accents = [
-  { color: "text-green-500", icon: "ri-code-box-fill" },
+  { color: "text-accent", icon: "ri-rocket-fill" },
   { color: "text-amber-500", icon: "ri-gamepad-fill" },
   { color: "text-blue-500", icon: "ri-layout-grid-fill" },
   { color: "text-purple-500", icon: "ri-film-fill" },
-  { color: "text-rose-500", icon: "ri-rocket-fill" },
+  { color: "text-rose-500", icon: "ri-code-box-fill" },
 ];
 
 /**
- * ProjectSection - Clean, polished version
- * - Scroll animations trigger once
- * - Side-to-side carousel transitions
- * - Static tech badges (no blinking)
+ * ProjectSection — bento grid. One flagship project gets the large tile,
+ * the rest fill in around it. Every tile opens the same detail popup.
  */
 function ProjectSection() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [showLive, setShowLive] = useState(false);
-  const [direction, setDirection] = useState(0);
-
+  const [activeIndex, setActiveIndex] = useState(null);
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-70% 0px 0px 0px" });
 
-  const project = ProjectsData[activeIndex];
-  const accent = accents[activeIndex % accents.length];
+  const openProject = (index) => setActiveIndex(index);
+  const closeProject = () => setActiveIndex(null);
 
-  const goPrev = () => {
-    setDirection(-1);
-    setShowLive(false);
-    setActiveIndex((prev) => (prev === 0 ? ProjectsData.length - 1 : prev - 1));
-  };
+  const activeProject = activeIndex !== null ? ProjectsData[activeIndex] : null;
+  const activeAccent = activeIndex !== null ? accents[activeIndex % accents.length] : null;
 
-  const goNext = () => {
-    setDirection(1);
-    setShowLive(false);
-    setActiveIndex((prev) => (prev === ProjectsData.length - 1 ? 0 : prev + 1));
-  };
-
-  const goTo = (index) => {
-    setDirection(index > activeIndex ? 1 : -1);
-    setShowLive(false);
-    setActiveIndex(index);
-  };
-
-  // Side-to-side slide animation for carousel
-  const slideVariants = {
-    enter: (dir) => ({ x: dir > 0 ? 300 : -300, opacity: 0 }),
-    center: { x: 0, opacity: 1 },
-    exit: (dir) => ({ x: dir > 0 ? -300 : 300, opacity: 0 }),
-  };
-
-  const contentSlideVariants = {
-    enter: (dir) => ({ x: dir > 0 ? 50 : -50, opacity: 0 }),
-    center: { x: 0, opacity: 1 },
-    exit: (dir) => ({ x: dir > 0 ? -50 : 50, opacity: 0 }),
-  };
+  const tileSpans = ["md:col-span-2 md:row-span-2", "", "", "md:col-span-3"];
 
   return (
-    <div className="max-w-4xl mx-auto w-full" ref={sectionRef}>
-      {/* Section Header */}
+    <div className="max-w-5xl mx-auto w-full" ref={sectionRef}>
+      {/* Section Header — left-aligned, split into label + heading */}
       <motion.div
-        className="mb-12 text-center"
+        className="mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4"
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         variants={fadeUp}
         transition={springSettle}
       >
-        <div className="inline-flex items-center gap-2 text-txt-muted text-xs uppercase tracking-[0.15em] mb-4">
-          <i className="ri-folder-3-fill text-amber-400 text-base"></i>
-          <span>Selected Work</span>
+        <div>
+          <div className="inline-flex items-center gap-2 text-txt-muted text-xs uppercase tracking-[0.15em] mb-4">
+            <i className="ri-folder-3-fill text-accent text-base"></i>
+            <span>Selected Work</span>
+          </div>
+          <h2 className="font-serif text-4xl md:text-5xl font-normal text-txt leading-[1.05] tracking-[-0.015em]">
+            Projects
+          </h2>
         </div>
-        <h2 className="font-serif text-4xl md:text-5xl font-normal text-txt mb-4 leading-[1.05] tracking-[-0.015em]">
-          Projects
-        </h2>
-        <p className="text-txt-muted max-w-lg text-lg mx-auto">
+        <p className="text-txt-muted text-lg max-w-xs md:text-right">
           A collection of things I've built while learning and growing as a
           developer.
         </p>
       </motion.div>
 
-      {/* Main Showcase */}
-      <motion.div
-        className="relative"
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        variants={fadeUp}
-        transition={{ ...springSettle, delay: 0.2 }}
-      >
-        <div className="glass-card-heavy rounded-3xl overflow-hidden">
-          {/* Browser Chrome */}
-          <div className="flex items-center justify-between px-4 py-3 bg-elevated border-b border-bdr">
-            <div className="flex items-center gap-2">
-              <div className="flex gap-1.5">
-                <span className="w-3 h-3 rounded-full bg-red-400"></span>
-                <span className="w-3 h-3 rounded-full bg-amber-400"></span>
-                <span className="w-3 h-3 rounded-full bg-green-400"></span>
-              </div>
-              <span className="ml-4 text-xs text-txt-muted font-medium">
-                {project.name}
-              </span>
-            </div>
-
-            {/* View Toggle */}
-            {project.liveUrl && (
-              <div className="flex items-center gap-1 bg-alt rounded-lg p-1">
-                <motion.button
-                  onClick={() => setShowLive(false)}
-                  whileTap={pressTap}
-                  transition={springSettleFast}
-                  className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-                    !showLive
-                      ? "bg-surface text-txt shadow-sm"
-                      : "text-txt-muted hover:text-txt-secondary"
-                  }`}
-                >
-                  <i className="ri-image-line mr-1"></i>
-                  Preview
-                </motion.button>
-                <motion.button
-                  onClick={() => setShowLive(true)}
-                  whileTap={pressTap}
-                  transition={springSettleFast}
-                  className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-                    showLive
-                      ? "bg-surface text-txt shadow-sm"
-                      : "text-txt-muted hover:text-txt-secondary"
-                  }`}
-                >
-                  <i className="ri-play-circle-line mr-1"></i>
-                  Live
-                </motion.button>
-              </div>
-            )}
-          </div>
-
-          {/* Preview Area */}
-          <div className="relative h-[350px] md:h-[420px] bg-elevated overflow-hidden">
-            <AnimatePresence mode="wait" custom={direction}>
-              {showLive && project.liveUrl ? (
-                <motion.iframe
-                  key={`live-${activeIndex}`}
-                  src={project.liveUrl}
-                  className="w-full h-full border-0"
-                  title={`Live preview of ${project.name}`}
-                  loading="lazy"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+      {/* Bento grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 auto-rows-[220px] gap-4">
+        {ProjectsData.map((project, index) => {
+          const accent = accents[index % accents.length];
+          return (
+            <motion.button
+              key={project.name}
+              onClick={() => openProject(index)}
+              className={`group relative rounded-2xl overflow-hidden text-left glass-card ${tileSpans[index] || ""}`}
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              variants={fadeUp}
+              transition={{ ...springSettle, delay: 0.1 + index * 0.08 }}
+              whileHover={liftHover}
+              whileTap={pressTap}
+            >
+              {/* Background image or fallback */}
+              {project.bgImage ? (
+                <div
+                  className="absolute inset-0 bg-cover bg-top transition-transform duration-300 group-hover:scale-105"
+                  style={{ backgroundImage: `url(${project.bgImage})` }}
                 />
               ) : (
-                <motion.div
-                  key={`preview-${activeIndex}`}
-                  custom={direction}
-                  variants={slideVariants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                  transition={springSettleFast}
-                  className="absolute inset-0"
-                >
-                  {project.bgImage ? (
-                    <div
-                      className="absolute inset-0 bg-cover bg-top"
-                      style={{ backgroundImage: `url(${project.bgImage})` }}
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-stone-800 to-stone-900">
-                      <i
-                        className={`${accent.icon} text-9xl text-stone-600`}
-                      ></i>
-                    </div>
-                  )}
-                </motion.div>
+                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-stone-800 to-stone-900">
+                  <i className={`${accent.icon} ${accent.color} text-6xl opacity-40`}></i>
+                </div>
               )}
-            </AnimatePresence>
-          </div>
 
-          {/* Project Info */}
-          <div className="p-5 md:p-6 border-t border-bdr-light">
-            <AnimatePresence mode="wait" custom={direction}>
-              <motion.div
-                key={activeIndex}
-                custom={direction}
-                variants={contentSlideVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={springSettleFast}
-              >
-                {/* Title + Description */}
-                <div className="mb-4">
-                  <h3 className="font-serif text-xl md:text-2xl font-normal text-txt mb-2">
-                    {project.name}
-                  </h3>
-                  <p className="text-txt-muted text-sm md:text-base line-clamp-2">
-                    {project.projectDescription}
-                  </p>
-                </div>
+              {/* Gradient scrim so text stays legible over any image */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
 
-                {/* Tech + Actions Row */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  {/* Tech Stack - Static badges */}
-                  <div className="flex flex-wrap gap-1.5">
-                    {project.techStack?.map((tech, i) => {
-                      const colors = techColors[tech] || defaultTech;
-                      return (
-                        <span
-                          key={i}
-                          className={`inline-flex items-center gap-1 px-2 py-0.5 ${colors.bg} ${colors.text} rounded-md text-xs font-medium`}
-                        >
-                          <i className={`${colors.icon} text-[10px]`}></i>
-                          {tech}
-                        </span>
-                      );
-                    })}
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex items-center gap-2">
-                    <motion.button
-                      onClick={() => setIsModalOpen(true)}
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={pressTap}
-                      transition={springMomentum}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 btn-primary rounded-lg text-sm font-medium transition-colors duration-150"
-                    >
-                      <i className="ri-article-line text-xs"></i>
-                      Details
-                    </motion.button>
-                    {project.githubRepo && (
-                      <motion.a
-                        href={project.githubRepo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.03 }}
-                        whileTap={pressTap}
-                        transition={springMomentum}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-surface border border-bdr text-txt-secondary rounded-lg text-sm font-medium hover:bg-elevated hover:border-bdr-strong transition-colors duration-150"
+              {/* Content */}
+              <div className="relative h-full flex flex-col justify-end p-5">
+                <h3 className="font-serif text-xl md:text-2xl font-normal text-white mb-1">
+                  {project.name}
+                </h3>
+                <p className="text-white/70 text-sm line-clamp-2 mb-3">
+                  {project.projectDescription}
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {project.techStack?.slice(0, 3).map((tech) => {
+                    const colors = techColors[tech] || defaultTech;
+                    return (
+                      <span
+                        key={tech}
+                        className={`inline-flex items-center gap-1 px-2 py-0.5 ${colors.bg} ${colors.text} rounded-md text-xs font-medium`}
                       >
-                        <i className="ri-github-fill text-xs"></i>
-                        Code
-                      </motion.a>
-                    )}
-                  </div>
+                        <i className={`${colors.icon} text-[10px]`}></i>
+                        {tech}
+                      </span>
+                    );
+                  })}
                 </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
-
-        {/* Navigation Arrows */}
-        <motion.button
-          onClick={goPrev}
-          aria-label="Previous project"
-          whileHover={{ scale: 1.1 }}
-          whileTap={pressTap}
-          transition={springMomentum}
-          className="absolute -left-4 md:-left-5 top-[250px] md:top-[300px] w-10 h-10 md:w-12 md:h-12 rounded-full glass-card shadow-lg flex items-center justify-center text-txt-secondary z-10"
-        >
-          <i className="ri-arrow-left-s-line text-xl"></i>
-        </motion.button>
-        <motion.button
-          onClick={goNext}
-          aria-label="Next project"
-          whileHover={{ scale: 1.1 }}
-          whileTap={pressTap}
-          transition={springMomentum}
-          className="absolute -right-4 md:-right-5 top-[250px] md:top-[300px] w-10 h-10 md:w-12 md:h-12 rounded-full glass-card shadow-lg flex items-center justify-center text-txt-secondary z-10"
-        >
-          <i className="ri-arrow-right-s-line text-xl"></i>
-        </motion.button>
-      </motion.div>
-
-      {/* Thumbnail Navigation */}
-      <div className="flex items-center justify-center gap-4 mt-8">
-        {ProjectsData.map((proj, index) => (
-          <motion.button
-            key={index}
-            onClick={() => goTo(index)}
-            whileHover={{ scale: 1.05 }}
-            whileTap={pressTap}
-            transition={springMomentum}
-            style={{ width: "112px", height: "63px" }}
-            className={`relative rounded-xl overflow-hidden border-2 transition-colors duration-150 bg-elevated ${
-              index === activeIndex
-                ? "border-stone-400 shadow-lg"
-                : "border-bdr opacity-50 hover:opacity-100 hover:border-bdr-strong"
-            }`}
-          >
-            {proj.bgImage ? (
-              <img
-                src={proj.bgImage}
-                alt={proj.name}
-                className="absolute top-0 left-0 w-full h-full object-cover"
-              />
-            ) : (
-              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-stone-800 to-stone-900 flex items-center justify-center">
-                <i
-                  className={`${accents[index % accents.length].icon} text-xl text-stone-500`}
-                ></i>
               </div>
-            )}
-          </motion.button>
-        ))}
+            </motion.button>
+          );
+        })}
       </div>
 
       {/* Modal */}
       <AnimatePresence>
-        {isModalOpen && (
+        {activeProject && (
           <ProjectPopup
             project={{
-              name: project.name,
-              description: project.projectDescription,
-              githubRepo: project.githubRepo,
-              liveUrl: project.liveUrl,
-              info: project.projectInfo,
-              challenges: project.challenges,
-              skillsLearned: project.skillsLearned,
-              bgImage: project.bgImage,
-              techStack: project.techStack,
-              details: project.details,
+              name: activeProject.name,
+              description: activeProject.projectDescription,
+              githubRepo: activeProject.githubRepo,
+              liveUrl: activeProject.liveUrl,
+              info: activeProject.projectInfo,
+              challenges: activeProject.challenges,
+              skillsLearned: activeProject.skillsLearned,
+              bgImage: activeProject.bgImage,
+              techStack: activeProject.techStack,
+              details: activeProject.details,
             }}
-            onClose={() => setIsModalOpen(false)}
-            accent={accent}
+            onClose={closeProject}
+            accent={activeAccent}
           />
         )}
       </AnimatePresence>

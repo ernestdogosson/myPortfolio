@@ -54,14 +54,14 @@ function Contact() {
       <div className="max-w-3xl mx-auto w-full">
         {/* Section Header */}
         <motion.div
-          className="mb-12 text-center"
+          className="mb-12 text-center md:text-left"
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={fadeUp}
           transition={springSettle}
         >
           <div className="inline-flex items-center gap-2 text-txt-muted text-xs uppercase tracking-[0.15em] mb-4">
-            <i className="ri-mail-send-fill text-rose-400 text-base"></i>
+            <i className="ri-mail-send-fill text-accent text-base"></i>
             <span>Get In Touch</span>
           </div>
           <h2 className="font-serif text-4xl md:text-5xl font-normal text-txt mb-4 leading-[1.05] tracking-[-0.015em]">

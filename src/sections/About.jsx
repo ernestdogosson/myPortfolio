@@ -1,12 +1,11 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { fadeUp, springSettle, liftHover } from "../utils/motion.js";
+import { fadeUp, springSettle } from "../utils/motion.js";
 
 /**
- * About section - polished with consistent spacing
- * - Single column layout for better readability
- * - Bio integrated with cards for cohesive flow
- * - Consistent animations
+ * About — asymmetric two-column layout. Left: heading, bio, stats.
+ * Right: a connected vertical list (the "line + dot" device), echoing
+ * the reference sites rather than another row of identical cards.
  */
 function About() {
   const sectionRef = useRef(null);
@@ -15,42 +14,44 @@ function About() {
     margin: "-70% 0px 0px 0px",
   });
 
+  const timelineItems = [
+    {
+      icon: "ri-graduation-cap-fill",
+      title: "Backend-utvecklare",
+      subtitle: "Sundsgårdens folkhögskola, 2026",
+      detail: "3 of 4 modules graded VG",
+    },
+    {
+      icon: "ri-graduation-cap-line",
+      title: "M.Sc. Geomatics",
+      subtitle: "Lund University, 2022",
+    },
+    {
+      icon: "ri-football-fill",
+      title: "Football Coach",
+      subtitle: "Landskrona BoIS, 2026–present",
+      detail: "Youth academy, P14 squad",
+    },
+  ];
+
   return (
     <section id="about" className="py-24 md:py-32 px-6" ref={sectionRef}>
-      <div className="max-w-3xl mx-auto w-full">
-        {/* Section Header */}
+      <div className="max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-16">
+        {/* Left column — heading, bio, stats */}
         <motion.div
-          className="mb-12 text-center"
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={fadeUp}
           transition={springSettle}
         >
           <div className="inline-flex items-center gap-2 text-txt-muted text-xs uppercase tracking-[0.15em] mb-4">
-            <i className="ri-user-heart-fill text-emerald-400 text-base"></i>
+            <i className="ri-user-heart-fill text-accent text-base"></i>
             <span>About Me</span>
           </div>
-          <h2 className="font-serif text-4xl md:text-5xl font-normal text-txt mb-4 leading-[1.05] tracking-[-0.015em]">
+          <h2 className="font-serif text-4xl md:text-5xl font-normal text-txt mb-6 leading-[1.05] tracking-[-0.015em]">
             Who I Am
           </h2>
-          <p className="text-txt-muted max-w-lg text-lg mx-auto">
-            From mapping the world to building for the web.
-          </p>
-        </motion.div>
-
-        {/* Bio Card */}
-        <motion.div
-          className="glass-card rounded-2xl p-8 mb-6"
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          variants={fadeUp}
-          transition={{ ...springSettle, delay: 0.15 }}
-        >
-          <div className="flex items-center gap-2 text-txt-muted text-[0.65rem] uppercase tracking-[0.15em] mb-4">
-            <i className="ri-route-fill text-blue-500 text-sm"></i>
-            <span>My Journey</span>
-          </div>
-          <div className="space-y-4 text-txt-secondary leading-relaxed">
+          <div className="space-y-4 text-txt-secondary leading-relaxed mb-10">
             <p>
               I came to web development through an unusual path — a Geography
               degree, a Master's in Geomatics, and years of working with
@@ -61,134 +62,100 @@ function About() {
               I completed a backend-focused Yrkeshögskola program in 2026,
               covering API development, databases, authentication, and
               production deployment, and now build fullstack projects end to
-              end while coaching youth football at Landskrona BoIS.
+              end.
             </p>
           </div>
-        </motion.div>
 
-        {/* Stats row */}
-        <motion.div
-          className="flex items-center justify-center divide-x divide-bdr mb-6"
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          variants={fadeUp}
-          transition={{ ...springSettle, delay: 0.2 }}
-        >
-          {[
-            { value: "4+", label: "Projects Shipped" },
-            { value: "3/4", label: "YH Modules Graded VG" },
-            { value: "2", label: "Languages Spoken" },
-          ].map((stat) => (
-            <div key={stat.label} className="flex-1 text-center px-4">
-              <p className="font-serif text-4xl md:text-5xl text-accent leading-none mb-1">
-                {stat.value}
-              </p>
-              <p className="text-txt-muted text-xs uppercase tracking-[0.1em]">
-                {stat.label}
-              </p>
-            </div>
-          ))}
-        </motion.div>
-
-        {/* Info Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Currently Learning */}
-          <motion.div
-            className="glass-card border-t-2 border-t-blue-500/50 rounded-2xl p-6"
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            variants={fadeUp}
-            transition={springSettle}
-            whileHover={liftHover}
-          >
-            <div className="flex items-center gap-2 text-txt-muted text-[0.65rem] uppercase tracking-[0.15em] mb-4">
-              <i className="ri-graduation-cap-fill text-blue-500 text-sm"></i>
-              <span>Background</span>
-            </div>
-            <div className="space-y-2">
-              <p className="text-txt-secondary text-sm leading-snug">
-                <span className="font-medium text-txt">Backend-utvecklare</span>
-                <br />
-                Sundsgårdens folkhögskola, 2026
-              </p>
-              <p className="text-txt-secondary text-sm leading-snug">
-                <span className="font-medium text-txt">M.Sc. Geomatics</span>
-                <br />
-                Lund University, 2022
-              </p>
-              <p className="text-txt-muted text-xs">Swedish: upper-intermediate</p>
-            </div>
-          </motion.div>
-
-          {/* Beyond Code */}
-          <motion.div
-            className="glass-card border-t-2 border-t-rose-500/50 rounded-2xl p-6"
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            variants={fadeUp}
-            transition={springSettle}
-            whileHover={liftHover}
-          >
-            <div className="flex items-center gap-2 text-txt-muted text-[0.65rem] uppercase tracking-[0.15em] mb-4">
-              <i className="ri-heart-fill text-rose-500 text-sm"></i>
-              <span>Beyond Code</span>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-500/10 text-green-400 rounded-lg text-sm font-medium">
-                <i className="ri-football-fill"></i>
-                Football Coach
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-500/10 text-amber-400 rounded-lg text-sm font-medium">
-                <i className="ri-music-2-fill"></i>
-                Music
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-rose-500/10 text-rose-400 rounded-lg text-sm font-medium">
-                <i className="ri-disc-fill"></i>
-                Guitar
-              </span>
-            </div>
-          </motion.div>
-
-        </div>
-
-        {/* Skills — logo grid instead of colored pills */}
-        <motion.div
-          className="mt-6"
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          variants={fadeUp}
-          transition={{ ...springSettle, delay: 0.25 }}
-        >
-          <div className="flex items-center gap-2 text-txt-muted text-[0.65rem] uppercase tracking-[0.15em] mb-4 justify-center">
-            <i className="ri-tools-fill text-accent text-sm"></i>
-            <span>Building With</span>
-          </div>
-          <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
+          {/* Stats */}
+          <div className="flex divide-x divide-bdr">
             {[
-              { icon: "ri-html5-fill", label: "HTML", color: "text-orange-400" },
-              { icon: "ri-css3-fill", label: "CSS", color: "text-blue-400" },
-              { icon: "ri-javascript-fill", label: "JS", color: "text-amber-400" },
-              { icon: "ri-reactjs-fill", label: "React", color: "text-cyan-400" },
-              { icon: "ri-tailwind-css-fill", label: "Tailwind", color: "text-teal-400" },
-              { icon: "ri-nodejs-fill", label: "Node.js", color: "text-green-400" },
-              { icon: "ri-database-2-fill", label: "PostgreSQL", color: "text-sky-400" },
-              { icon: "ri-ship-2-fill", label: "Docker", color: "text-blue-400" },
-              { icon: "ri-git-branch-fill", label: "Git", color: "text-orange-400" },
-              { icon: "ri-sass-fill", label: "SCSS", color: "text-pink-400" },
-            ].map((skill) => (
-              <motion.div
-                key={skill.label}
-                className="skill-tile rounded-xl p-4 flex flex-col items-center gap-2"
-                whileHover={{ y: -3 }}
-                transition={springSettle}
-              >
-                <i className={`${skill.icon} ${skill.color} text-2xl`}></i>
-                <span className="text-txt-secondary text-xs">{skill.label}</span>
-              </motion.div>
+              { value: "4+", label: "Projects Shipped" },
+              { value: "3/4", label: "YH Modules Graded VG" },
+              { value: "2", label: "Languages Spoken" },
+            ].map((stat) => (
+              <div key={stat.label} className="flex-1 pr-4 first:pl-0 pl-4">
+                <p className="font-serif text-3xl md:text-4xl text-accent leading-none mb-1">
+                  {stat.value}
+                </p>
+                <p className="text-txt-muted text-xs uppercase tracking-[0.1em]">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-txt-muted text-sm mt-6 flex items-center gap-2">
+            <i className="ri-music-2-fill text-accent"></i>
+            Off the clock: guitar and writing music.
+          </p>
+        </motion.div>
+
+        {/* Right column — connected timeline */}
+        <motion.div
+          className="relative pl-8"
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={fadeUp}
+          transition={{ ...springSettle, delay: 0.15 }}
+        >
+          {/* The connecting line */}
+          <div className="absolute left-[7px] top-2 bottom-2 w-px bg-bdr" />
+
+          <div className="space-y-8">
+            {timelineItems.map((item) => (
+              <div key={item.title} className="relative">
+                <span className="absolute -left-8 top-1 w-3.5 h-3.5 rounded-full bg-accent ring-4 ring-page" />
+                <div className="flex items-center gap-2 text-txt-muted text-[0.65rem] uppercase tracking-[0.15em] mb-1.5">
+                  <i className={`${item.icon} text-accent text-sm`}></i>
+                </div>
+                <p className="text-txt font-medium">{item.title}</p>
+                <p className="text-txt-secondary text-sm">{item.subtitle}</p>
+                {item.detail && (
+                  <p className="text-txt-muted text-xs mt-0.5">{item.detail}</p>
+                )}
+              </div>
             ))}
           </div>
         </motion.div>
       </div>
+
+      {/* Skills — full-width logo grid below the two columns */}
+      <motion.div
+        className="max-w-5xl mx-auto w-full mt-16"
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        variants={fadeUp}
+        transition={{ ...springSettle, delay: 0.25 }}
+      >
+        <div className="flex items-center gap-2 text-txt-muted text-[0.65rem] uppercase tracking-[0.15em] mb-4">
+          <i className="ri-tools-fill text-accent text-sm"></i>
+          <span>Building With</span>
+        </div>
+        <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
+          {[
+            { icon: "ri-html5-fill", label: "HTML", color: "text-orange-400" },
+            { icon: "ri-css3-fill", label: "CSS", color: "text-blue-400" },
+            { icon: "ri-javascript-fill", label: "JS", color: "text-amber-400" },
+            { icon: "ri-reactjs-fill", label: "React", color: "text-cyan-400" },
+            { icon: "ri-tailwind-css-fill", label: "Tailwind", color: "text-teal-400" },
+            { icon: "ri-nodejs-fill", label: "Node.js", color: "text-green-400" },
+            { icon: "ri-database-2-fill", label: "PostgreSQL", color: "text-sky-400" },
+            { icon: "ri-ship-2-fill", label: "Docker", color: "text-blue-400" },
+            { icon: "ri-git-branch-fill", label: "Git", color: "text-orange-400" },
+            { icon: "ri-sass-fill", label: "SCSS", color: "text-pink-400" },
+          ].map((skill) => (
+            <motion.div
+              key={skill.label}
+              className="skill-tile rounded-xl p-4 flex flex-col items-center gap-2"
+              whileHover={{ y: -3 }}
+              transition={springSettle}
+            >
+              <i className={`${skill.icon} ${skill.color} text-2xl`}></i>
+              <span className="text-txt-secondary text-xs">{skill.label}</span>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
     </section>
   );
 }

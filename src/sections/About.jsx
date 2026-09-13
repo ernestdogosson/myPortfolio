@@ -54,9 +54,8 @@ function About() {
           <div className="space-y-4 text-txt-secondary leading-relaxed mb-10">
             <p>
               I came to web development through an unusual path: a Geography
-              degree, a Master's in Geomatics, and a GIS internship along the
-              way. That background shaped how I think about structuring
-              information and building interfaces.
+              degree and a Master's in Geomatics. That background shaped how
+              I think about structuring information and building interfaces.
             </p>
             <p>
               I completed a backend-focused Yrkeshögskola program in 2026,

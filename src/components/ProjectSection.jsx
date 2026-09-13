@@ -51,7 +51,7 @@ function ProjectSection() {
           </h2>
         </div>
         <p className="text-txt-muted text-lg max-w-xs md:text-right">
-          A collection of things I've built while learning and growing as a
+          A selection of things I've built while learning and growing as a
           developer.
         </p>
       </motion.div>
@@ -86,8 +86,10 @@ function ProjectSection() {
                 </div>
               )}
 
-              {/* Gradient scrim so text stays legible over any image */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+              {/* Darkening scrim so text stays legible even over a bright
+                  image (e.g. a light-colored screenshot) */}
+              <div className="absolute inset-0 bg-black/30" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/55 to-transparent" />
 
               {/* Content */}
               <div className="relative h-full flex flex-col justify-end p-5">

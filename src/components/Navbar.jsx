@@ -163,7 +163,12 @@ export default function Navbar() {
 
             {/* Menu Panel */}
             <motion.nav
-              className="absolute top-[73px] left-0 right-0 glass-card-heavy border-b border-bdr"
+              className="absolute top-[73px] left-0 right-0 border-b border-bdr"
+              style={{
+                backgroundColor: "var(--nav-bg)",
+                backdropFilter: "blur(20px) saturate(1.5)",
+                WebkitBackdropFilter: "blur(20px) saturate(1.5)",
+              }}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}

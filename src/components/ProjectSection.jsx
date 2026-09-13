@@ -7,7 +7,7 @@ import { fadeUp, springSettle, liftHover, pressTap } from "../utils/motion.js";
 
 const accents = [
   { color: "text-accent", icon: "ri-rocket-fill" },
-  { color: "text-amber-500", icon: "ri-gamepad-fill" },
+  { color: "text-amber-500", icon: "ri-calendar-todo-fill" },
   { color: "text-blue-500", icon: "ri-layout-grid-fill" },
   { color: "text-purple-500", icon: "ri-film-fill" },
   { color: "text-rose-500", icon: "ri-code-box-fill" },
@@ -78,8 +78,10 @@ function ProjectSection() {
                   style={{ backgroundImage: `url(${project.bgImage})` }}
                 />
               ) : (
-                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-stone-800 to-stone-900">
-                  <i className={`${accent.icon} ${accent.color} text-6xl opacity-40`}></i>
+                <div className="absolute inset-0 bg-gradient-to-br from-stone-800 to-stone-900">
+                  {/* Corner badge, not centered — a title that wraps to two
+                      lines must never fight the icon for the same space. */}
+                  <i className={`${accent.icon} ${accent.color} absolute top-4 right-4 text-2xl opacity-40`}></i>
                 </div>
               )}
 

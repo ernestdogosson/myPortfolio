@@ -117,6 +117,7 @@ function About() {
             { icon: "ri-server-fill", label: "Express", color: "text-zinc-300" },
             { icon: "ri-shape-2-fill", label: "Prisma", color: "text-indigo-400" },
             { icon: "ri-database-2-fill", label: "PostgreSQL", color: "text-sky-400" },
+            { icon: "ri-shield-check-fill", label: "Zod", color: "text-blue-300" },
             { icon: "ri-ship-2-fill", label: "Docker", color: "text-blue-400" },
             { icon: "ri-git-branch-fill", label: "Git", color: "text-orange-400" },
             { icon: "ri-file-code-fill", label: "SCSS", color: "text-pink-400" },

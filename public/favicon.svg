@@ -1,5 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="8" fill="#0b0f14"/>
-  <text x="16" y="22" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="17" fill="#e8eaed">ED</text>
-  <circle cx="6" cy="7" r="2.5" fill="#ef6b4a"/>
+  <rect x="-5" y="-5" width="10" height="10" rx="2.5" transform="translate(16,7) rotate(45)" fill="#ef6b4a"/>
+  <rect x="-5" y="-5" width="10" height="10" rx="2.5" transform="translate(7,16) rotate(45)" fill="#111318"/>
+  <rect x="-5" y="-5" width="10" height="10" rx="2.5" transform="translate(25,16) rotate(45)" fill="#111318"/>
+  <rect x="-5" y="-5" width="10" height="10" rx="2.5" transform="translate(16,25) rotate(45)" fill="#111318"/>
 </svg>
